@@ -1,17 +1,15 @@
 // package com.example.demo;
 //
-//
-//
 // import
 // org.springframework.security.authentication.encoding.Md5PasswordEncoder;
 // import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 //
 // public class EncryptPassword {
 //
-//
 // public static void main(String[] args) {
 // System.out.println(BCryptPassword("3091996"));
 // }
+//
 // public static String BCryptPassword(String password) {
 //
 // BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
@@ -28,7 +26,5 @@
 // return hashedPass;
 //
 // }
-//
-//
 //
 // }
