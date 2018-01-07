@@ -22,6 +22,7 @@ public class AdminServiceApplication implements CommandLineRunner {
 	BusinessServiceImpl businessServiceImpl;
 	@Autowired
 	AdminServiceImpl adminServiceImpl;
+
 	// private static final Logger LOGGER =
 	// LoggerFactory.getLogger(AdminServiceApplication.class);
 
@@ -67,6 +68,8 @@ public class AdminServiceApplication implements CommandLineRunner {
 		// getById
 		// System.out.println(adminServiceImpl.getAdminById(2).getEmail());
 		// ------------------- ------------------------------------
+		// System.out.println(businessimpl.findById(1).getEmail());
+
 		System.out.println("Done ya man ");
 	}
 

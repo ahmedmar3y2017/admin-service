@@ -2,7 +2,6 @@ package com.example.demo.ServiceImpl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import com.example.demo.DaoImpl.AdminDaoImpl;
 import com.example.demo.Service.AdminService;
 import com.example.demo.entities.Admin;

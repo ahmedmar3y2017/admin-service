@@ -1,6 +1,7 @@
 package com.example.demo.ServiceImpl;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.DaoImpl.BusinessDaoImpl;
@@ -8,6 +9,7 @@ import com.example.demo.Service.BusinessService;
 import com.example.demo.entities.Business;
 
 @Service
+
 public class BusinessServiceImpl implements BusinessService {
 
 	@Autowired
