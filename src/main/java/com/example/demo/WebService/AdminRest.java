@@ -46,7 +46,7 @@ public class AdminRest {
 
 		Admin admin = adminServiceImpl.getAdminById(Integer.parseInt(id));
 		if (admin == null) {
-			return new ResponseEntity<String>("Admin Not Found !!", HttpStatus.NO_CONTENT);
+			return new ResponseEntity<String>("Admin Not Found !!", HttpStatus.NOT_FOUND);
 
 		} else {
 			return new ResponseEntity<Admin>(admin, HttpStatus.OK);
@@ -61,7 +61,7 @@ public class AdminRest {
 
 		Admin aadmin = adminServiceImpl.updateAdmin(Integer.parseInt(id), admin);
 		if (aadmin == null) {
-			return new ResponseEntity<String>("Admin Not Found !!", HttpStatus.NO_CONTENT);
+			return new ResponseEntity<String>("Admin Not Found !!", HttpStatus.NOT_FOUND);
 
 		} else {
 			return new ResponseEntity<Admin>(aadmin, HttpStatus.OK);

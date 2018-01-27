@@ -16,6 +16,8 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.Proxy;
@@ -31,7 +33,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 @DynamicInsert
 @DynamicUpdate
 
-public class Admin implements java.io.Serializable {
+public class Admin  {
 
 	private Integer id;
 	private Business business;
@@ -113,7 +115,8 @@ public class Admin implements java.io.Serializable {
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "businessid", nullable = false)
-	@JsonManagedReference
+	@JsonBackReference
+
 	public Business getBusiness() {
 		return this.business;
 	}

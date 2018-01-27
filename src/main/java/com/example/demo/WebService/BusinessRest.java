@@ -47,21 +47,20 @@ public class BusinessRest {
 
 	// getById
 	@RequestMapping(value = "/business/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-	public Business Getspecific(@PathVariable("id") String id) {
+	public ResponseEntity<?>  Getspecific(@PathVariable("id") String id) {
 
 		System.out.println(id);
 		Business business = businessServiceImpl.getBusinessById(Integer.parseInt(id));
 		System.out.println(business.getEmail());
-		// if (business == null) {
-		// return new ResponseEntity<String>("Business Not Found !!",
-		// HttpStatus.NO_CONTENT);
-		//
-		// } else {
-		// return new ResponseEntity<Business>(business, HttpStatus.OK);
-		//
-		// }
+		 if (business == null) {
+		 return new ResponseEntity<String>("Business Not Found !!",
+		 HttpStatus.NOT_FOUND);
 
-		return business;
+		 } else {
+		 return new ResponseEntity<Business>(business, HttpStatus.OK);
+
+		 }
+
 
 	}
 
@@ -71,7 +70,7 @@ public class BusinessRest {
 
 		Business business = businessServiceImpl.updateBusiness(Integer.parseInt(id), busines);
 		if (business == null) {
-			return new ResponseEntity<String>("Business Not Found !!", HttpStatus.NO_CONTENT);
+			return new ResponseEntity<String>("Business Not Found !!", HttpStatus.NOT_FOUND);
 
 		} else {
 			return new ResponseEntity<Business>(business, HttpStatus.OK);

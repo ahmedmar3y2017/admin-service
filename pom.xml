@@ -16,7 +16,6 @@
 		<artifactId>spring-boot-starter-parent</artifactId>
 		<version>1.5.6.RELEASE</version>
 		<relativePath />
-		lookup parent from repository
 	</parent>
 
 	<properties>
@@ -43,7 +42,23 @@
 			</exclusions>
 		</dependency>
 
-	<!-- ********** security *********** -->
+
+		<!--******************** swagger *************************-->
+		<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-swagger-ui</artifactId>
+			<version>2.6.1</version>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-swagger2</artifactId>
+			<version>2.6.1</version>
+			<scope>compile</scope>
+		</dependency>
+
+
+		<!-- ********** security *********** -->
 	<!-- <dependency> -->
 	<!-- <groupId>org.springframework.boot</groupId> -->
 	<!-- <artifactId>spring-boot-starter-security</artifactId> -->

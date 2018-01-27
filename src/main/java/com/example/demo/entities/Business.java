@@ -14,6 +14,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.Proxy;
@@ -28,7 +29,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 // to dynamic insert and update
 @DynamicInsert
 @DynamicUpdate
-public class Business implements java.io.Serializable {
+public class Business  {
 
 	private Integer id;
 	private String name;
@@ -247,7 +248,8 @@ public class Business implements java.io.Serializable {
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "business")
-	// @JsonBackReference
+	@JsonManagedReference
+
 	public Set<Admin> getAdmins() {
 		return this.admins;
 	}
@@ -257,7 +259,8 @@ public class Business implements java.io.Serializable {
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "business")
-	// @JsonBackReference
+	@JsonManagedReference
+
 	public Set<Product> getProducts() {
 		return this.products;
 	}
