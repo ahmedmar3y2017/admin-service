@@ -14,6 +14,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
@@ -78,9 +79,13 @@ public class Business  {
 
 	}
 
+	public Business(Integer id) {
+		this.id = id;
+	}
+
 	public Business(Integer id, String name, String password, String logo, String contact, String email, String address,
-			String city, String state, String country, Integer postalCode, String url, String description, String notes,
-			String paymentMethods, Integer active, Set<Admin> admins, Set<Product> products) {
+					String city, String state, String country, Integer postalCode, String url, String description, String notes,
+					String paymentMethods, Integer active, Set<Admin> admins, Set<Product> products) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -248,8 +253,8 @@ public class Business  {
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "business")
-	@JsonManagedReference
-
+//	@JsonManagedReference
+	@JsonIgnore
 	public Set<Admin> getAdmins() {
 		return this.admins;
 	}
@@ -259,8 +264,8 @@ public class Business  {
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "business")
-	@JsonManagedReference
-
+//	@JsonManagedReference
+	@JsonIgnore
 	public Set<Product> getProducts() {
 		return this.products;
 	}

@@ -1,5 +1,6 @@
 package com.example.demo.DaoImpl;
 
+import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -11,6 +12,8 @@ import org.springframework.transaction.annotation.Transactional;
 import com.example.demo.Dao.BusinessDao;
 
 import com.example.demo.entities.Business;
+
+import java.util.List;
 
 @Transactional
 @Component
@@ -94,6 +97,15 @@ public class BusinessDaoImpl implements BusinessDao {
 
 		Business business = session.get(Business.class, id);
 		return business;
+	}
+
+	@Override
+	public List<Business> getAll() {
+		Session session = sessionFactory.openSession();
+
+		Criteria criteria = session.createCriteria(Business.class);
+		List<Business> list =criteria.list();
+		return list;
 	}
 
 }

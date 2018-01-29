@@ -8,6 +8,8 @@ import com.example.demo.DaoImpl.BusinessDaoImpl;
 import com.example.demo.Service.BusinessService;
 import com.example.demo.entities.Business;
 
+import java.util.List;
+
 @Service
 
 public class BusinessServiceImpl implements BusinessService {
@@ -37,6 +39,11 @@ public class BusinessServiceImpl implements BusinessService {
 	public Business getBusinessById(int id) {
 		// TODO Auto-generated method stub
 		return business.getBusinessById(id);
+	}
+
+	@Override
+	public List<Business> getAll() {
+		return business.getAll();
 	}
 
 }

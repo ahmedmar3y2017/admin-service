@@ -36,4 +36,5 @@ public class AdminServiceImpl implements AdminService {
 		return adminDaoImpl.getAdminById(id);
 	}
 
+
 }

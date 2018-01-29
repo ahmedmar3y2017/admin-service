@@ -11,4 +11,5 @@ public interface AdminDao {
 	public int deleteAdminById(int id);
 
 	public Admin getAdminById(int id);
+
 }

@@ -2,6 +2,10 @@ package com.example.demo.WebService;
 
 import java.util.List;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -19,13 +23,25 @@ import com.example.demo.entities.Business;
 //http://localhost:9091
 @RestController
 @RequestMapping("/rest")
+@Api(value="BusinessIn Business")
+
 public class BusinessRest {
 
 	@Autowired
 	BusinessServiceImpl businessServiceImpl;
 
 	// insert
-	@RequestMapping(value = "/business", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+	@ApiOperation(value = "View a list of available products",response = Business.class)
+	@ApiResponses(value = {
+			@ApiResponse(code = 201, message = "Successfully Added "),
+			@ApiResponse(code = 401, message = "You are not authorized to view the resource"),
+			@ApiResponse(code = 403, message = "Accessing the resource you were trying to reach is forbidden"),
+			@ApiResponse(code = 204, message = "Not Countent Found") ,
+			@ApiResponse(code = 400, message = "bad Request please Fill All parameters ")
+	}
+	)
+	@RequestMapping(value = "/business", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE ,
+			produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public ResponseEntity<?> insert(@RequestBody Business busines) {
 		if (busines == null) {
 			return new ResponseEntity<String>("Please add Business details !!", HttpStatus.NO_CONTENT);
@@ -46,6 +62,14 @@ public class BusinessRest {
 	}
 
 	// getById
+	@ApiOperation(value = "View available Business",response = Business.class)
+	@ApiResponses(value = {
+			@ApiResponse(code = 200, message = "Successfully retrieved "),
+			@ApiResponse(code = 401, message = "You are not authorized to view the resource"),
+			@ApiResponse(code = 403, message = "Accessing the resource you were trying to reach is forbidden"),
+			@ApiResponse(code = 404, message = "The resource you were trying to reach is not found")
+	}
+	)
 	@RequestMapping(value = "/business/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public ResponseEntity<?>  Getspecific(@PathVariable("id") String id) {
 
@@ -64,7 +88,40 @@ public class BusinessRest {
 
 	}
 
+	// getAll
+	@ApiOperation(value = "View a list of available Business",response = Business.class)
+	@ApiResponses(value = {
+			@ApiResponse(code = 200, message = "Successfully retrieved "),
+			@ApiResponse(code = 401, message = "You are not authorized to view the resource"),
+			@ApiResponse(code = 403, message = "Accessing the resource you were trying to reach is forbidden"),
+			@ApiResponse(code = 404, message = "The resource you were trying to reach is not found")
+	}
+	)
+	@RequestMapping(value = "/business", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	public ResponseEntity<?>  GetAll() {
+		List<Business> business = businessServiceImpl.getAll();
+		if (business.size()==0) {
+			return new ResponseEntity<String>("Business Not Found !!",
+					HttpStatus.NOT_FOUND);
+
+		} else {
+			return new ResponseEntity<List<Business>>(business, HttpStatus.OK);
+
+		}
+
+
+	}
+
+
 	// Update
+	@ApiOperation(value = "Update Avaliable Business",response = Business.class)
+	@ApiResponses(value = {
+			@ApiResponse(code = 200, message = "Successfully Updated "),
+			@ApiResponse(code = 401, message = "You are not authorized to view the resource"),
+			@ApiResponse(code = 403, message = "Accessing the resource you were trying to reach is forbidden"),
+			@ApiResponse(code = 404, message = "The resource you were trying to reach is not found")
+	}
+	)
 	@RequestMapping(value = "/business/{id}", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<?> UpdateTopic(@RequestBody Business busines, @PathVariable("id") String id) {
 
@@ -79,6 +136,14 @@ public class BusinessRest {
 	}
 
 	// Delete
+	@ApiOperation(value = "Delete Available Business",response = String.class)
+	@ApiResponses(value = {
+			@ApiResponse(code = 200, message = "Successfully Deleted "),
+			@ApiResponse(code = 401, message = "You are not authorized to view the resource"),
+			@ApiResponse(code = 403, message = "Accessing the resource you were trying to reach is forbidden"),
+			@ApiResponse(code = 404, message = "The resource you were trying to reach is not found")
+	}
+	)
 	@RequestMapping(value = "/business/{id}", method = RequestMethod.DELETE)
 	public ResponseEntity<?> DeleteTopic(@PathVariable("id") String id) {
 		int result = businessServiceImpl.deleteBusinessById(Integer.parseInt(id));
