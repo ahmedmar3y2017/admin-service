@@ -154,7 +154,7 @@ public class Admin  {
 		this.email = email;
 	}
 
-	@Column(name = "password")
+	@Column(name = "password" )
 	public String getPassword() {
 		return password;
 	}

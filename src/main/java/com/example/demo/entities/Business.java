@@ -29,7 +29,7 @@ public class Business  {
 
 	private Integer id;
 	private String name;
-	@Column(name = "password")
+	@Column(name = "password" )
 	private String password;
 	private String logo;
 	private String contact;

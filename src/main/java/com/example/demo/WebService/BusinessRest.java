@@ -33,7 +33,7 @@ public class BusinessRest {
 	@Autowired
 	AdminServiceImpl adminServiceImpl;
 	// insert
-	@ApiOperation(value = "View a list of available products",response = Business.class)
+	@ApiOperation(value = "View a list of available Business",response = Business.class)
 	@ApiResponses(value = {
 			@ApiResponse(code = 201, message = "Successfully Added "),
 			@ApiResponse(code = 401, message = "You are not authorized to view the resource"),
