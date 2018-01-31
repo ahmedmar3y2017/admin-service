@@ -2,6 +2,7 @@ package com.example.demo.WebService;
 
 import java.util.List;
 
+import com.example.demo.ServiceImpl.AdminServiceImpl;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
@@ -29,7 +30,8 @@ public class BusinessRest {
 
 	@Autowired
 	BusinessServiceImpl businessServiceImpl;
-
+	@Autowired
+	AdminServiceImpl adminServiceImpl;
 	// insert
 	@ApiOperation(value = "View a list of available products",response = Business.class)
 	@ApiResponses(value = {
@@ -70,7 +72,8 @@ public class BusinessRest {
 			@ApiResponse(code = 404, message = "The resource you were trying to reach is not found")
 	}
 	)
-	@RequestMapping(value = "/business/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	@RequestMapping(value = "/business/{id}", method = RequestMethod.GET, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE,
+			produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public ResponseEntity<?>  Getspecific(@PathVariable("id") String id) {
 
 		System.out.println(id);
@@ -97,7 +100,8 @@ public class BusinessRest {
 			@ApiResponse(code = 404, message = "The resource you were trying to reach is not found")
 	}
 	)
-	@RequestMapping(value = "/business", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	@RequestMapping(value = "/business", method = RequestMethod.GET, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE,
+			produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public ResponseEntity<?>  GetAll() {
 		List<Business> business = businessServiceImpl.getAll();
 		if (business.size()==0) {
@@ -122,10 +126,11 @@ public class BusinessRest {
 			@ApiResponse(code = 404, message = "The resource you were trying to reach is not found")
 	}
 	)
-	@RequestMapping(value = "/business/{id}", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<?> UpdateTopic(@RequestBody Business busines, @PathVariable("id") String id) {
+	@RequestMapping(value = "/business/{id}", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE,
+			produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	public ResponseEntity<?> UpdateTopic(@RequestBody Business busines, @PathVariable("id") int id) {
 
-		Business business = businessServiceImpl.updateBusiness(Integer.parseInt(id), busines);
+		Business business = businessServiceImpl.updateBusiness(id, busines);
 		if (business == null) {
 			return new ResponseEntity<String>("Business Not Found !!", HttpStatus.NOT_FOUND);
 
@@ -135,7 +140,7 @@ public class BusinessRest {
 		}
 	}
 
-	// Delete
+	// Delete Business Account From System
 	@ApiOperation(value = "Delete Available Business",response = String.class)
 	@ApiResponses(value = {
 			@ApiResponse(code = 200, message = "Successfully Deleted "),
@@ -144,9 +149,11 @@ public class BusinessRest {
 			@ApiResponse(code = 404, message = "The resource you were trying to reach is not found")
 	}
 	)
-	@RequestMapping(value = "/business/{id}", method = RequestMethod.DELETE)
-	public ResponseEntity<?> DeleteTopic(@PathVariable("id") String id) {
-		int result = businessServiceImpl.deleteBusinessById(Integer.parseInt(id));
+	@RequestMapping(value = "/business/{id}", method = RequestMethod.DELETE , consumes = MediaType.APPLICATION_JSON_UTF8_VALUE,
+			produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	public ResponseEntity<?> DeleteTopic(@PathVariable("id") int id) {
+		// delete all admins and all products first by cascading option
+		int result = businessServiceImpl.deleteBusinessById(id);
 		if (result == 0) {
 			return new ResponseEntity<String>("Business Not Found !!", HttpStatus.NOT_FOUND);
 

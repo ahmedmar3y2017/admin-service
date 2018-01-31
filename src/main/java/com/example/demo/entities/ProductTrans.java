@@ -3,6 +3,9 @@ package com.example.demo.entities;
 // default package
 // Generated Nov 23, 2017 7:42:03 PM by Hibernate Tools 5.2.3.Final
 
+import org.hibernate.annotations.DynamicInsert;
+import org.hibernate.annotations.DynamicUpdate;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -18,6 +21,9 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "product_trans", catalog = "businessin")
+// to dynamic insert and update
+@DynamicInsert
+@DynamicUpdate
 public class ProductTrans implements java.io.Serializable {
 
 	private Integer id;
@@ -55,7 +61,7 @@ public class ProductTrans implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "productid", nullable = false)
+	@JoinColumn(name = "productid", nullable = false   , updatable = false)
 	public Product getProduct() {
 		return this.product;
 	}

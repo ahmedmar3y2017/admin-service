@@ -5,14 +5,9 @@ package com.example.demo.entities;
 
 import java.util.HashSet;
 import java.util.Set;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
+import javax.persistence.*;
+
 import static javax.persistence.GenerationType.IDENTITY;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
@@ -252,9 +247,10 @@ public class Business  {
 		this.active = active;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "business")
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "business" , cascade = CascadeType.ALL)
 //	@JsonManagedReference
 	@JsonIgnore
+
 	public Set<Admin> getAdmins() {
 		return this.admins;
 	}
@@ -263,7 +259,7 @@ public class Business  {
 		this.admins = admins;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "business")
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "business" ,  cascade = CascadeType.ALL)
 //	@JsonManagedReference
 	@JsonIgnore
 	public Set<Product> getProducts() {

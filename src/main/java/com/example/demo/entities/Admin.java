@@ -4,17 +4,9 @@ package com.example.demo.entities;
 // Generated Nov 23, 2017 7:42:03 PM by Hibernate Tools 5.2.3.Final
 
 import java.util.Date;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
+import javax.persistence.*;
+
 import static javax.persistence.GenerationType.IDENTITY;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -113,10 +105,11 @@ public class Admin  {
 		this.id = id;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "businessid", nullable = false)
+	@ManyToOne(fetch = FetchType.LAZY )
+	@JoinColumn(name = "businessid", nullable = false , updatable = false)
 //	@JsonBackReference
 @JsonIgnore
+
 	public Business getBusiness() {
 		return this.business;
 	}

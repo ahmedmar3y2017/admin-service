@@ -12,4 +12,5 @@ public interface AdminDao {
 
 	public Admin getAdminById(int id);
 
+
 }

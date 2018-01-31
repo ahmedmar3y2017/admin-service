@@ -22,6 +22,7 @@ public class AdminRest {
     AdminServiceImpl adminServiceImpl;
     @Autowired
     BusinessServiceImpl businessServiceImpl;
+
     // insert
     @RequestMapping(value = "/business/{id}/admin", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE,
             produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
@@ -38,9 +39,7 @@ public class AdminRest {
 
         }
         // encrypt password before insert Admin
-        System.out.println("Before");
         admin.setBusiness(new Business(Businessid));
-        System.out.println("After");
 
         Admin a = adminServiceImpl.saveAdmin(admin);
 
@@ -49,56 +48,79 @@ public class AdminRest {
     }
 
     // getById
-    @RequestMapping(value = "/business/{businessid}/admin/{adminid}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    public ResponseEntity<?> Getspecific(@PathVariable("businessid") int businessid , @PathVariable("adminid") int adminid ) {
+    @RequestMapping(value = "/business/{businessid}/admin/{adminid}", method = RequestMethod.GET, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE,
+            produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    public ResponseEntity<?> Getspecific(@PathVariable("businessid") int businessid, @PathVariable("adminid") int adminid) {
 
-       Business business= businessServiceImpl.getBusinessById(businessid);
-       if(business == null) {
+        Business business = businessServiceImpl.getBusinessById(businessid);
+        if (business == null) {
 
-           return new ResponseEntity<String>("Business Not Found !!", HttpStatus.NOT_FOUND);
-       }else
-       {
-         Admin admin=  business.getAdmins().stream()
-               .filter(x -> adminid ==x.getId())
-               .findAny()
-               .orElse(null);
+            return new ResponseEntity<String>("Business Not Found !!", HttpStatus.NOT_FOUND);
+        } else {
+            Admin admin = business.getAdmins().stream()
+                    .filter(x -> adminid == x.getId())
+                    .findAny()
+                    .orElse(null);
 
-                      if (admin == null) {
-               return new ResponseEntity<String>("Admin Not Found !!", HttpStatus.NOT_FOUND);
+            if (admin == null) {
+                return new ResponseEntity<String>("Admin Not Found !!", HttpStatus.NOT_FOUND);
 
-           } else {
-               return new ResponseEntity<Admin>(admin, HttpStatus.OK);
+            } else {
+                return new ResponseEntity<Admin>(admin, HttpStatus.OK);
 
-           }
-       }
+            }
+        }
 
     }
 
-    // Update
-    @RequestMapping(value = "/admin/{id}", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<?> UpdateAdmin(@RequestBody Admin admin, @PathVariable("id") String id) {
+    // Update -- not yet
+    @RequestMapping(value = "/business/{businessid}/admin/{adminid}", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE,
+            produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    public ResponseEntity<?> UpdateAdmin(@PathVariable("businessid") int businessid, @PathVariable("adminid") int adminid, @RequestBody Admin admin) {
 
-        Admin aadmin = adminServiceImpl.updateAdmin(Integer.parseInt(id), admin);
-        if (aadmin == null) {
-            return new ResponseEntity<String>("Admin Not Found !!", HttpStatus.NOT_FOUND);
 
+        Business business = businessServiceImpl.getBusinessById(businessid);
+        if (business == null) {
+
+            return new ResponseEntity<String>("Business Not Found !!", HttpStatus.NOT_FOUND);
         } else {
-            return new ResponseEntity<Admin>(aadmin, HttpStatus.OK);
 
+
+            Admin aadmin = adminServiceImpl.updateAdmin(adminid, admin);
+            if (aadmin == null) {
+                return new ResponseEntity<String>("Admin Not Found !!", HttpStatus.NOT_FOUND);
+
+            } else {
+                return new ResponseEntity<Admin>(aadmin, HttpStatus.OK);
+
+            }
         }
+
+
     }
 
     // Delete
-    @RequestMapping(value = "/admin/{id}", method = RequestMethod.DELETE)
-    public ResponseEntity<?> DeleteTopic(@PathVariable("id") String id) {
-        int result = adminServiceImpl.deleteAdminById(Integer.parseInt(id));
-        if (result == 0) {
-            return new ResponseEntity<String>("Admin Not Found !!", HttpStatus.NOT_FOUND);
+    @RequestMapping(value = "/business/{businessid}/admin/{adminid}", method = RequestMethod.DELETE, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE,
+            produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    public ResponseEntity<?> DeleteTopic(@PathVariable("businessid") int businessid, @PathVariable("adminid") int adminid) {
 
+        Business business = businessServiceImpl.getBusinessById(businessid);
+        if (business == null) {
+
+            return new ResponseEntity<String>("Business Not Found !!", HttpStatus.NOT_FOUND);
         } else {
-            return new ResponseEntity<String>("Done Delete Admin ", HttpStatus.OK);
+            int result = adminServiceImpl.deleteAdminById(adminid);
+            if (result == 0) {
+                return new ResponseEntity<String>("Admin Not Found !!", HttpStatus.NOT_FOUND);
+
+            } else {
+                return new ResponseEntity<String>("Done Delete Admin ", HttpStatus.OK);
+
+            }
+
 
         }
+
 
     }
 }

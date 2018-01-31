@@ -13,4 +13,5 @@ public interface AdminService {
 	public Admin getAdminById(int id);
 
 //	public Admin saveAdmin(int businessid, Admin admin);
+
 }

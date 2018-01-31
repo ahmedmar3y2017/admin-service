@@ -3,6 +3,9 @@ package com.example.demo.entities;
 // default package
 // Generated Nov 23, 2017 7:42:03 PM by Hibernate Tools 5.2.3.Final
 
+import org.hibernate.annotations.DynamicInsert;
+import org.hibernate.annotations.DynamicUpdate;
+
 import java.util.Date;
 import javax.persistence.AttributeOverride;
 import javax.persistence.AttributeOverrides;
@@ -21,6 +24,9 @@ import javax.persistence.TemporalType;
  */
 @Entity
 @Table(name = "order_detail", catalog = "businessin")
+// to dynamic insert and update
+@DynamicInsert
+@DynamicUpdate
 public class OrderDetail implements java.io.Serializable {
 
 	private OrderDetailId id;

@@ -14,4 +14,5 @@ public interface BusinessService {
 	public Business getBusinessById(int id);
 
 	public List<Business> getAll();
+
 }
