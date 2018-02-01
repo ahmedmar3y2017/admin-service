@@ -1,7 +1,7 @@
 package com.example.demo.DaoImpl;
 
-import com.example.demo.Dao.CategoryDao;
-import com.example.demo.entities.Category;
+import com.example.demo.Dao.BrandDao;
+import com.example.demo.entities.Brands;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -16,85 +16,101 @@ import java.util.List;
  */
 @Transactional
 @Component
-public class CategoryDaoImpl implements CategoryDao {
+public class BrandDaoImpl implements BrandDao {
     @Autowired
     private SessionFactory sessionFactory;
 
     @Override
-    public Category saveCategory(Category category) {
+    public Brands saveBrands(Brands brands) {
+
         Session session = sessionFactory.openSession();
 
         session.beginTransaction();
-        System.out.println(category.getParentId() + "\t" + category.getActive()+"\t" + category.getSubCategories());
 
-        session.save(category);
+        session.save(brands);
 
         session.getTransaction().commit();
-        return category;
+        return brands;
+
+
     }
 
     @Override
-    public Category updateCategory(int id, Category category) {
+    public Brands updateBrands(int id, Brands brands) {
+
+
         Session session = sessionFactory.openSession();
 
-        Category category1 = session.get(Category.class, id);
+        Brands brands1 = session.get(Brands.class, id);
 
-        if (category1 == null) {
+        if (brands1 == null) {
             System.err.println("Not Found");
             return null;
         } else {
 
-            category1.setActive(category.getActive());
-            category1.setName(category.getName());
-            category1.setParentId(category.getParentId());
-            category1.setPic(category.getPic());
+            brands1.setDescription(brands.getDescription());
+            brands1.setName(brands.getName());
+            brands1.setUrl(brands.getUrl());
+            brands1.setLogo(brands.getLogo());
             session.beginTransaction();
 
-            session.update(category1);
+            session.update(brands1);
 
             session.getTransaction().commit();
 
         }
 
-        return category1;
+        return brands1;
+
+
     }
 
     @Override
-    public int deleteCategoryById(int id) {
+    public int deleteBrandsById(int id) {
+
         Session session = sessionFactory.openSession();
 
-        Category category = session.get(Category.class, id);
+        Brands brands = session.get(Brands.class, id);
 
-        if (category == null) {
+        if (brands == null) {
             return 0;
 
         } else {
 
             session.beginTransaction();
 
-            session.delete(category);
+            session.delete(brands);
 
             session.getTransaction().commit();
 
             return 1;
         }
 
+
     }
 
     @Override
-    public Category getCategoryById(int id) {
+    public Brands getBrandsById(int id) {
+
+
         Session session = sessionFactory.openSession();
 
-        Category category = session.get(Category.class, id);
-        return category;
+        Brands brands = session.get(Brands.class, id);
+        return brands;
+
+
     }
 
     @Override
-    public List<Category> getAll() {
+    public List<Brands> getAll() {
+
+
         Session session = sessionFactory.openSession();
 
-        Criteria criteria = session.createCriteria(Category.class);
-        List<Category> list =criteria.list();
+        Criteria criteria = session.createCriteria(Brands.class);
+        List<Brands> list = criteria.list();
         return list;
+
+
     }
 }

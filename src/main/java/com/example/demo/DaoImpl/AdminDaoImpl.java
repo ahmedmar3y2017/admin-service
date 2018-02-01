@@ -8,7 +8,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.example.demo.Dao.AdminDao;
 import com.example.demo.entities.Admin;
-import com.example.demo.entities.Business;
 
 @Transactional
 @Component

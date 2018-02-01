@@ -1,7 +1,6 @@
 package com.example.demo.Service;
 
 import com.example.demo.entities.Admin;
-import com.example.demo.entities.Business;
 
 public interface AdminService {
 	public Admin saveAdmin(Admin admin);

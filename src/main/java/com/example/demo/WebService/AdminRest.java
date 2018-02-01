@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.demo.ServiceImpl.AdminServiceImpl;
 import com.example.demo.entities.Admin;
 
-import java.util.List;
 import java.util.Set;
 
 // basic Url
@@ -32,12 +31,12 @@ public class AdminRest {
     BusinessServiceImpl businessServiceImpl;
 
     // insert
-    @ApiOperation(value = "View a list of available Admin to specific Business",response = Admin.class)
+    @ApiOperation(value = "View a list of available Admin to specific Business", response = Admin.class)
     @ApiResponses(value = {
             @ApiResponse(code = 201, message = "Successfully Added "),
             @ApiResponse(code = 401, message = "You are not authorized to view the resource"),
             @ApiResponse(code = 403, message = "Accessing the resource you were trying to reach is forbidden"),
-            @ApiResponse(code = 204, message = "Not Countent Found") ,
+            @ApiResponse(code = 204, message = "Not Countent Found"),
             @ApiResponse(code = 400, message = "bad Request please Fill All parameters ")
     }
     )
@@ -65,9 +64,8 @@ public class AdminRest {
     }
 
 
-
     // getAll
-    @ApiOperation(value = "View a list of available All Admin By BusinessId",response = Admin.class)
+    @ApiOperation(value = "View a list of available All Admin By BusinessId", response = Admin.class)
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Successfully retrieved "),
             @ApiResponse(code = 401, message = "You are not authorized to view the resource"),
@@ -77,9 +75,9 @@ public class AdminRest {
     )
     @RequestMapping(value = "/business/{businessid}/admin", method = RequestMethod.GET, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE,
             produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    public ResponseEntity<?>  GetAll(@PathVariable("businessid") int businessid) {
+    public ResponseEntity<?> GetAll(@PathVariable("businessid") int businessid) {
         Business business = businessServiceImpl.getBusinessById(businessid);
-        if (business==null) {
+        if (business == null) {
             return new ResponseEntity<String>("Business Not Found !!",
                     HttpStatus.NOT_FOUND);
 
@@ -92,14 +90,8 @@ public class AdminRest {
 
     }
 
-
-
-
-
-
-
     // getById
-    @ApiOperation(value = "View available Admin",response = Admin.class)
+    @ApiOperation(value = "View available Admin", response = Admin.class)
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Successfully retrieved "),
             @ApiResponse(code = 401, message = "You are not authorized to view the resource"),
@@ -133,7 +125,7 @@ public class AdminRest {
     }
 
     // Update
-    @ApiOperation(value = "Update Avaliable Admin",response = Admin.class)
+    @ApiOperation(value = "Update Avaliable Admin", response = Admin.class)
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Successfully Updated "),
             @ApiResponse(code = 401, message = "You are not authorized to view the resource"),
@@ -167,7 +159,7 @@ public class AdminRest {
     }
 
     // Delete
-    @ApiOperation(value = "Delete Available Admin",response = String.class)
+    @ApiOperation(value = "Delete Available Admin", response = String.class)
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Successfully Deleted "),
             @ApiResponse(code = 401, message = "You are not authorized to view the resource"),

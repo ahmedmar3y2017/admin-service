@@ -76,9 +76,7 @@ public class BusinessRest {
 			produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public ResponseEntity<?>  Getspecific(@PathVariable("id") String id) {
 
-		System.out.println(id);
 		Business business = businessServiceImpl.getBusinessById(Integer.parseInt(id));
-		System.out.println(business.getEmail());
 		 if (business == null) {
 		 return new ResponseEntity<String>("Business Not Found !!",
 		 HttpStatus.NOT_FOUND);

@@ -1,9 +1,6 @@
 package com.example.demo.Dao;
 
 import com.example.demo.entities.Admin;
-import com.example.demo.entities.Business;
-
-import java.util.List;
 
 public interface AdminDao {
 	public Admin saveAdmin(Admin admin);
