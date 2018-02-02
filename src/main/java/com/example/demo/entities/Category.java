@@ -232,15 +232,15 @@ public class Category implements java.io.Serializable {
 	@Column(nullable=false,columnDefinition="int default 1")
 	private Integer active;
 	private String pic;
-//	@JsonIgnore
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "category")
+	@JsonIgnore
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "category" )
 	private List<Product> products = new ArrayList<Product>();
 	@ManyToOne
-	@JoinColumn(name="parent_id")
+	@JoinColumn(name="parent_id" )
 	@JsonIgnore
 	// @ColumnDefault("0")
 	private Category parentId;
-	@OneToMany(mappedBy="parentId")
+	@OneToMany(mappedBy="parentId" )
 	@JsonIgnore
 	private List<Category> subCategories=new ArrayList<>();
 
@@ -263,6 +263,10 @@ public class Category implements java.io.Serializable {
 	}
 
 	public Category() {
+	}
+
+	public Category(Category parentId) {
+		this.parentId = parentId;
 	}
 
 	public Category(String name, Integer parentId, Integer active, String pic, List<Product> products) {

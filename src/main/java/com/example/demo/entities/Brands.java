@@ -3,6 +3,7 @@ package com.example.demo.entities;
 // default package
 // Generated Nov 23, 2017 7:42:03 PM by Hibernate Tools 5.2.3.Final
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 
@@ -89,6 +90,7 @@ public class Brands implements java.io.Serializable {
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "brands" ,  cascade = CascadeType.ALL)
+	@JsonIgnore
 	public Set<Product> getProducts() {
 		return this.products;
 	}

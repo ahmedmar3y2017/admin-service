@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+//import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -18,9 +19,8 @@ import com.example.demo.entities.Business;
 
 @RestController
 @SpringBootApplication
-//@ComponentScan(basePackageClasses = {
-//		SwaggerConfig.class
-//})
+//@EnableResourceServer
+
 
 public class AdminServiceApplication implements CommandLineRunner {
 	@Autowired

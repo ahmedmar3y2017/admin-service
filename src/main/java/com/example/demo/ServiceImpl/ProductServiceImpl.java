@@ -6,6 +6,8 @@ import com.example.demo.entities.Product;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * Created by ahmed on 1/31/2018.
  */
@@ -14,6 +16,7 @@ public class ProductServiceImpl implements ProductService {
 
     @Autowired
     ProductDaoImpl productDao;
+
     @Override
     public Product saveProduct(Product product) {
         return productDao.saveProduct(product);
@@ -21,7 +24,7 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public Product updateProduct(int id, Product product) {
-        return productDao.updateProduct(id , product);
+        return productDao.updateProduct(id, product);
     }
 
     @Override
@@ -32,5 +35,10 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public Product getProductById(int id) {
         return productDao.getProductById(id);
+    }
+
+    @Override
+    public List<Product> getAll() {
+        return productDao.getAll();
     }
 }
