@@ -1,7 +1,9 @@
 package com.example.demo.DaoImpl;
 
+import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
@@ -93,6 +95,18 @@ public class AdminDaoImpl implements AdminDao {
         Admin admin = session.get(Admin.class, id);
 
         return admin;
+    }
+
+    @Override
+    public Admin getAdminByUsername(String username) {
+        Session session = sessionFactory.openSession();
+        Criteria criteria = session.createCriteria(Admin.class);
+        criteria.add(Restrictions.eq("username", username));
+        Admin admin = (Admin) criteria.uniqueResult();
+
+        return admin;
+
+
     }
 
 

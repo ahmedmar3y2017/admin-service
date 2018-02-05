@@ -33,6 +33,11 @@ public class Brands implements java.io.Serializable {
 	public Brands() {
 	}
 
+
+	public Brands(Integer id) {
+		this.id = id;
+	}
+
 	public Brands(String name, String logo, String description, String url, Set<Product> products) {
 		this.name = name;
 		this.logo = logo;

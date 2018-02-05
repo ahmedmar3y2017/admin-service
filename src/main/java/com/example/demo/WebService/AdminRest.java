@@ -76,14 +76,23 @@ public class AdminRest {
     @RequestMapping(value = "/business/{businessid}/admin", method = RequestMethod.GET, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE,
             produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public ResponseEntity<?> GetAll(@PathVariable("businessid") int businessid) {
+        System.out.println("Done");
         Business business = businessServiceImpl.getBusinessById(businessid);
+        System.out.println(business + "   **********************");
         if (business == null) {
             return new ResponseEntity<String>("Business Not Found !!",
                     HttpStatus.NOT_FOUND);
 
         } else {
+            Set<Admin> admins = business.getAdmins();
 
-            return new ResponseEntity<Set<Admin>>(business.getAdmins(), HttpStatus.OK);
+            if (admins.size() == 0) {
+                return new ResponseEntity<String>("Admins Not Found ..", HttpStatus.OK);
+
+            } else {
+                return new ResponseEntity<Set<Admin>>(admins, HttpStatus.OK);
+            }
+
 
         }
 

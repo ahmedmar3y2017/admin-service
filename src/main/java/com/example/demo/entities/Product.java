@@ -46,6 +46,10 @@ public class Product implements java.io.Serializable {
     public Product() {
     }
 
+    public Product(Integer id) {
+        this.id = id;
+    }
+
     public Product(Brands brands, Business business, Category category) {
         this.brands = brands;
         this.business = business;
@@ -219,9 +223,8 @@ public class Product implements java.io.Serializable {
         this.note = note;
     }
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "product", cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "product")
     @JsonIgnore
-
     public Set<OrderDetail> getOrderDetails() {
         return this.orderDetails;
     }

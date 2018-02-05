@@ -9,33 +9,37 @@ import com.example.demo.entities.Admin;
 @Service
 public class AdminServiceImpl implements AdminService {
 
-	@Autowired
-	AdminDaoImpl adminDaoImpl;
+    @Autowired
+    AdminDaoImpl adminDaoImpl;
 
-	@Override
-	public Admin saveAdmin(Admin admin) {
-		// TODO Auto-generated method stub
-		return adminDaoImpl.saveAdmin(admin);
-	}
+    @Override
+    public Admin saveAdmin(Admin admin) {
+        // TODO Auto-generated method stub
+        return adminDaoImpl.saveAdmin(admin);
+    }
 
-	@Override
-	public Admin updateAdmin(int id, Admin admin) {
-		// TODO Auto-generated method stub
-		return adminDaoImpl.updateAdmin(id, admin);
-	}
+    @Override
+    public Admin updateAdmin(int id, Admin admin) {
+        // TODO Auto-generated method stub
+        return adminDaoImpl.updateAdmin(id, admin);
+    }
 
-	@Override
-	public int deleteAdminById(int id) {
-		// TODO Auto-generated method stub
-		return adminDaoImpl.deleteAdminById(id);
-	}
+    @Override
+    public int deleteAdminById(int id) {
+        // TODO Auto-generated method stub
+        return adminDaoImpl.deleteAdminById(id);
+    }
 
-	@Override
-	public Admin getAdminById(int id) {
-		// TODO Auto-generated method stub
-		return adminDaoImpl.getAdminById(id);
-	}
+    @Override
+    public Admin getAdminById(int id) {
+        // TODO Auto-generated method stub
+        return adminDaoImpl.getAdminById(id);
+    }
 
+    @Override
+    public Admin getAdminByUsername(String username) {
+        return adminDaoImpl.getAdminByUsername(username);
+    }
 
 
 }

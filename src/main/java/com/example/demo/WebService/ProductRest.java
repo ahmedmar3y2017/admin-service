@@ -15,10 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Set;
@@ -42,11 +39,55 @@ public class ProductRest {
 
 
     // --------------------------------- Insert Method -----------------------------
+    //-------------------------- not completed ---------------------------
+    // insert
+    @ApiOperation(value = "Insert Product ", response = Product.class)
+    @ApiResponses(value = {
+            @ApiResponse(code = 201, message = "Successfully Added "),
+            @ApiResponse(code = 401, message = "You are not authorized to view the resource"),
+            @ApiResponse(code = 403, message = "Accessing the resource you were trying to reach is forbidden"),
+            @ApiResponse(code = 204, message = "Not Countent Found"),
+            @ApiResponse(code = 400, message = "bad Request please Fill All parameters ")
+    }
+    )
+    @RequestMapping(value = "/product", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE,
+            produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    public ResponseEntity<?> insert(
+            @RequestParam(required = true, name = "category", defaultValue = "0") int categoryId,
+            @RequestParam(required = true, name = "brand", defaultValue = "0") int brandId,
+            @RequestParam(required = true, name = "business") int businessId,
+            @RequestBody Product product) {
+        if (product == null) {
+            return new ResponseEntity<String>("Please add Product details !!", HttpStatus.NO_CONTENT);
+
+        }
+        if (businessId != 0) {
+
+            // check if Category and business and brand id found in database
+            if (categoryService.getCategoryById(categoryId) != null && businessServiceImpl.getBusinessById(businessId) != null && brandService.getBrandsById(brandId) != null) {
+                // add this product
+
+                product.setBrands(new Brands(brandId));
+                product.setCategory(new Category(categoryId));
+                product.setBusiness(new Business(businessId));
+
+                Product a = productService.saveProduct(product);
+
+                return new ResponseEntity<Product>(a, HttpStatus.CREATED);
+
+            } else {
+                return new ResponseEntity<String>("Parameters Not Exist in server ", HttpStatus.NO_CONTENT);
+
+            }
 
 
+        } else {
+            // if businessId Not Found
+            return new ResponseEntity<String>("BusinessId Required ..", HttpStatus.BAD_REQUEST);
 
 
-
+        }
+    }
 
 
     // -------------------------------- Get Methods ----------------------------------------
@@ -85,9 +126,9 @@ public class ProductRest {
             @ApiResponse(code = 404, message = "The resource you were trying to reach is not found")
     }
     )
-    @RequestMapping(value = "/business/{businessid}/product", method = RequestMethod.GET, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE,
+    @RequestMapping(value = "/business/{categoryid}/product", method = RequestMethod.GET, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE,
             produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    public ResponseEntity<?> GetAllByBusiness(@PathVariable("businessid") int businessid) {
+    public ResponseEntity<?> GetAllByBusiness(@PathVariable("categoryid") int businessid) {
 
         // check Business Exists
         Business business = businessServiceImpl.getBusinessById(businessid);
@@ -197,6 +238,45 @@ public class ProductRest {
 
     }
 
+    // delete by businessId
+    @ApiOperation(value = "Delete Available product By Business ..", response = String.class)
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Successfully Deleted "),
+            @ApiResponse(code = 401, message = "You are not authorized to view the resource"),
+            @ApiResponse(code = 403, message = "Accessing the resource you were trying to reach is forbidden"),
+            @ApiResponse(code = 404, message = "The resource you were trying to reach is not found")
+    }
+    )
+    @RequestMapping(value = "/business/{categoryid}/product", method = RequestMethod.DELETE, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE,
+            produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    public ResponseEntity<?> DeleteProductByBusiness(@PathVariable("categoryid") int businessid) {
+        int result = productService.deleteProductByBusinessId(businessid);
+        if (result == 0) {
+            return new ResponseEntity<String>("Product For Business ( " + businessid + " ) Not Found !!", HttpStatus.NOT_FOUND);
+        } else {
+            return new ResponseEntity<String>("Done Delete Product ", HttpStatus.OK);
+        }
+    }
+
+    // delete by Category
+    @ApiOperation(value = "Delete Available product By category ..", response = String.class)
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Successfully Deleted "),
+            @ApiResponse(code = 401, message = "You are not authorized to view the resource"),
+            @ApiResponse(code = 403, message = "Accessing the resource you were trying to reach is forbidden"),
+            @ApiResponse(code = 404, message = "The resource you were trying to reach is not found")
+    }
+    )
+    @RequestMapping(value = "/category/{categoryid}/product", method = RequestMethod.DELETE, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE,
+            produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    public ResponseEntity<?> DeleteProductByCategory(@PathVariable("categoryid") int categoryid) {
+        int result = productService.deleteProductByCategoryId(categoryid);
+        if (result == 0) {
+            return new ResponseEntity<String>("Product For Category ( " + categoryid + " ) Not Found !!", HttpStatus.NOT_FOUND);
+        } else {
+            return new ResponseEntity<String>("Done Delete Product ", HttpStatus.OK);
+        }
+    }
 
 
 }

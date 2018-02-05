@@ -10,6 +10,7 @@ public interface AdminService {
 	public int deleteAdminById(int id);
 
 	public Admin getAdminById(int id);
+	public Admin getAdminByUsername(String username);
 
 //	public Admin saveAdmin(int businessid, Admin admin);
 

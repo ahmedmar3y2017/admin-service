@@ -265,6 +265,10 @@ public class Category implements java.io.Serializable {
 	public Category() {
 	}
 
+	public Category(Integer id) {
+		this.id=id;
+	}
+
 	public Category(Category parentId) {
 		this.parentId = parentId;
 	}

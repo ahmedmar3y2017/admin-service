@@ -13,6 +13,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
+import org.hibernate.annotations.SQLInsert;
 import org.hibernate.annotations.Where;
 
 /**
@@ -28,11 +29,9 @@ public class Business {
 
     private Integer id;
     private String name;
-    @Column(name = "password")
     private String password;
     private String logo;
     private String contact;
-    @Column(name = "email", unique = true)
     private String email;
     private String address;
     private String city;
@@ -147,7 +146,7 @@ public class Business {
     public void setContact(String contact) {
         this.contact = contact;
     }
-
+    @Column(name = "email", unique = true)
     public String getEmail() {
         return this.email;
     }

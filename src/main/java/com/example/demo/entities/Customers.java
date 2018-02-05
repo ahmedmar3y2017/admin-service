@@ -21,18 +21,18 @@ import static javax.persistence.GenerationType.IDENTITY;
 // to dynamic insert and update
 @DynamicInsert
 @DynamicUpdate
-public class Customers implements java.io.Serializable {
+public class Customers extends User implements java.io.Serializable {
 
-	private Integer id;
-	private String address1;
-	private String address2;
-	private String city;
-	private String state;
-	private String country;
-	private Integer postalCode;
-	private Integer phone;
-	private Date lastActive;
-	private Date registerDate;
+//	private Integer id;
+//	private String address1;
+//	private String address2;
+//	private String city;
+//	private String state;
+//	private String country;
+//	private Integer postalCode;
+//	private Integer phone;
+//	private Date lastActive;
+//	private Date registerDate;
 	private Integer creditCard;
 	private Set<Cart> carts = new HashSet<Cart>(0);
 	private Set<Orders> orderses = new HashSet<Orders>(0);
@@ -178,5 +178,28 @@ public class Customers implements java.io.Serializable {
 	public void setOrderses(Set<Orders> orderses) {
 		this.orderses = orderses;
 	}
+	@Column(length = 1)
+	public Integer getEnabled() {
+		return enabled;
+	}
 
+	public void setEnabled(Integer enabled) {
+		this.enabled = enabled;
+	}
+
+	public String getRole() {
+		return role;
+	}
+
+	public void setRole(String role) {
+		this.role = role;
+	}
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
 }

@@ -40,7 +40,6 @@ public class Cart implements java.io.Serializable {
 	}
 
 	@EmbeddedId
-
 	@AttributeOverrides({
 			@AttributeOverride(name = "customersid", column = @Column(name = "customersid", nullable = false)),
 			@AttributeOverride(name = "productid", column = @Column(name = "productid", nullable = false)) })
