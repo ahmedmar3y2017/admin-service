@@ -1,14 +1,23 @@
 package com.example.demo;
 
+import java.util.Arrays;
 import java.util.Date;
+import java.util.concurrent.TimeUnit;
 
 //import com.example.demo.Swagger.SwaggerConfig;
 import com.example.demo.ServiceImpl.ProductServiceImpl;
+import com.google.common.cache.CacheBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 //import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
+import org.springframework.cache.CacheManager;
+import org.springframework.cache.annotation.EnableCaching;
+import org.springframework.cache.concurrent.ConcurrentMapCacheManager;
+import org.springframework.cache.guava.GuavaCacheManager;
+import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.context.annotation.Bean;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -21,80 +30,49 @@ import com.example.demo.entities.Business;
 @RestController
 @SpringBootApplication
 //@EnableResourceServer
+@EnableCaching
 
 
 public class AdminServiceApplication implements CommandLineRunner {
 
-    @Autowired
-    ProductServiceImpl productService;
-    @Autowired
-    AdminServiceImpl adminService;
-    // private static final Logger LOGGER =
-    // LoggerFactory.getLogger(AdminServiceApplication.class);
 
     public static void main(String[] args) {
-        SpringApplication.run(AdminServiceApplication.class, args);
+        ConfigurableApplicationContext configurableApplicationContext = SpringApplication.run(AdminServiceApplication.class, args);
 
-        // ahmed
-        // LOGGER.error("Message logged at ERROR level");
-        // LOGGER.warn("Message logged at WARN level");
-        // LOGGER.info("Message logged at INFO level");
-        // LOGGER.debug("Message logged at DEBUG level");
+        String[] beaStrings = configurableApplicationContext.getBeanDefinitionNames();
+        // to print all beans
+        System.err.println("********** All Beans ***************** ");
+//        Arrays.stream(beaStrings).sorted().forEach(x -> System.out.println(x));
+        System.out.println("*******************************");
 
     }
 
     @CrossOrigin
     @RequestMapping(value = {"/", "/rest/hello"})
     public String welcome() {
-        String name = "kk";
-        // if (name.length() == 2) {
-        // throw new RuntimeException("Opps exception has occured");
-        // }
         return "Hello World!!";
     }
 
+    // ------------- Bean For Cach ------------------------
+    // simple
+//    @Bean
+//    public CacheManager cacheManager(){
+//        return new ConcurrentMapCacheManager("businessCache" );
+//    }
+    // guava
+    @Bean
+    public CacheManager cacheManager() {
+        GuavaCacheManager cacheManager = new GuavaCacheManager();
+        cacheManager.setCacheBuilder(CacheBuilder.newBuilder().expireAfterWrite(24, TimeUnit.HOURS));
+        cacheManager.setCacheNames(Arrays.asList("businessCache"));
+        return cacheManager;
+    }
+
+
+    // on run App
     @Override
     public void run(String... args) throws Exception {
-        // ------------------- business --------------------
-        // insert
-        // businessServiceImpl.saveBusiness(createBusiness());
-        // update
-        // businessServiceImpl.updateBusiness(1, createBusiness());
-        // delete
-        // System.out.println(businessServiceImpl.deleteBusinessById(1));
-        // getById
-        // System.out.println(businessServiceImpl.getBusinessById(1).getAdmins());
-        // -------------------- admin -----------------------
-        // insert
-        // adminServiceImpl.saveAdmin(createAdmin());
-        // update
-        // adminServiceImpl.updateAdmin(1, createAdmin());
-        // delete
-        // adminServiceImpl.deleteAdminById(1);
-        // getById
-        // System.out.println(adminServiceImpl.getAdminById(2).getEmail());
-        // ------------------- ------------------------------------
-        // System.out.println(businessimpl.findById(1).getEmail());
-//		System.out.println(productService.deleteProductByCategoryId(12));
-
-//        System.out.println(adminService.getAdminByUsername("ahmed").getEmail());
-        System.out.println("Done ya man ");
+//        System.err.println("Done ya man ");
     }
 
-    private Business createBusiness() {
-
-        Business business = new Business("eslam", "123", "logooo", "123456789", "ahmedtttt@gmail.com", "tanta", "tanta",
-                "tant", "tantaaa", 123, "url", "desc", "notes", "paypal", 0);
-
-        return business;
-    }
-
-    private Admin createAdmin() {
-        Business business = createBusiness();
-        business.setId(1);
-        Admin admin = new Admin(business, "level1", "ahmed", "mohamed", "mohamedeslam@gmail.com", "123456", 123, 123,
-                "address1", "address2", "city", "state", "country", 123456, new Date(), new Date());
-        return admin;
-
-    }
 }
