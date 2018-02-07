@@ -233,7 +233,7 @@ public class Category implements java.io.Serializable {
 	private Integer active;
 	private String pic;
 	@JsonIgnore
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "category" )
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "category" , cascade = CascadeType.ALL)
 	private List<Product> products = new ArrayList<Product>();
 	@ManyToOne
 	@JoinColumn(name="parent_id" )

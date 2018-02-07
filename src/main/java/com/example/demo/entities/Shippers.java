@@ -22,57 +22,57 @@ import static javax.persistence.GenerationType.IDENTITY;
 @DynamicUpdate
 public class Shippers implements java.io.Serializable {
 
-	private Integer id;
-	private String companyName;
-	private Integer phone;
-	private Set<Orders> orderses = new HashSet<Orders>(0);
+    private Integer id;
+    private String companyName;
+    private Integer phone;
+    private Set<Orders> orderses = new HashSet<Orders>(0);
 
-	public Shippers() {
-	}
+    public Shippers() {
+    }
 
-	public Shippers(String companyName, Integer phone, Set<Orders> orderses) {
-		this.companyName = companyName;
-		this.phone = phone;
-		this.orderses = orderses;
-	}
+    public Shippers(String companyName, Integer phone, Set<Orders> orderses) {
+        this.companyName = companyName;
+        this.phone = phone;
+        this.orderses = orderses;
+    }
 
-	@Id
-	@GeneratedValue(strategy = IDENTITY)
+    @Id
+    @GeneratedValue(strategy = IDENTITY)
 
-	@Column(name = "id", unique = true, nullable = false)
-	public Integer getId() {
-		return this.id;
-	}
+    @Column(name = "id", unique = true, nullable = false)
+    public Integer getId() {
+        return this.id;
+    }
 
-	public void setId(Integer id) {
-		this.id = id;
-	}
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
-	@Column(name = "companyName")
-	public String getCompanyName() {
-		return this.companyName;
-	}
+    @Column(name = "companyName")
+    public String getCompanyName() {
+        return this.companyName;
+    }
 
-	public void setCompanyName(String companyName) {
-		this.companyName = companyName;
-	}
+    public void setCompanyName(String companyName) {
+        this.companyName = companyName;
+    }
 
-	@Column(name = "phone")
-	public Integer getPhone() {
-		return this.phone;
-	}
+    @Column(name = "phone")
+    public Integer getPhone() {
+        return this.phone;
+    }
 
-	public void setPhone(Integer phone) {
-		this.phone = phone;
-	}
+    public void setPhone(Integer phone) {
+        this.phone = phone;
+    }
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "shippers" ,  cascade = CascadeType.ALL)
-	public Set<Orders> getOrderses() {
-		return this.orderses;
-	}
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "shippers", cascade = CascadeType.ALL)
+    public Set<Orders> getOrderses() {
+        return this.orderses;
+    }
 
-	public void setOrderses(Set<Orders> orderses) {
-		this.orderses = orderses;
-	}
+    public void setOrderses(Set<Orders> orderses) {
+        this.orderses = orderses;
+    }
 
 }

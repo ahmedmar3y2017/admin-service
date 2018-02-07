@@ -223,7 +223,7 @@ public class Product implements java.io.Serializable {
         this.note = note;
     }
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "product")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "product" , cascade = CascadeType.ALL)
     @JsonIgnore
     public Set<OrderDetail> getOrderDetails() {
         return this.orderDetails;

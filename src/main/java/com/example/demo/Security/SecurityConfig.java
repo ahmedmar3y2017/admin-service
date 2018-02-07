@@ -25,11 +25,25 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        super.configure(http);
-
-
-        http.csrf().disable().authorizeRequests().antMatchers("/rest/**").hasAnyRole("admin").and().httpBasic().realmName("Topic security application Realm")
+//        http.authorizeRequests().antMatchers("/").permitAll();
+//        http.csrf().ignoringAntMatchers("/resources/**");
+//        http.csrf().disable().
+//                authorizeRequests().antMatchers("/rest/**").hasAnyRole("admin").
+//                and().httpBasic().realmName("WebService security application")
+//                .authenticationEntryPoint(authenticationEntryPoint);
+        http
+                .authorizeRequests()
+                .antMatchers("/").permitAll()
+                .anyRequest().authenticated()
+//                .and()
+//                .formLogin()
+//                .loginPage("/login")
+//                .permitAll()
+                .and()
+                .logout()
+                .permitAll().and().httpBasic().realmName("WebService security application")
                 .authenticationEntryPoint(authenticationEntryPoint);
+        ;
     }
 
     @Autowired

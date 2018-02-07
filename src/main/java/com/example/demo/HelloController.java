@@ -13,7 +13,7 @@ public class HelloController {
 
 
     // check Device type and platform
-    @RequestMapping("/hello")
+    @RequestMapping("/")
     public String greeting(Device device) {
         String deviceType = "browser";
         String platform = "browser";

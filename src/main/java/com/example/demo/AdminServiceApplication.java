@@ -48,12 +48,13 @@ public class AdminServiceApplication implements CommandLineRunner {
 
     }
 
-    @CrossOrigin
-    @RequestMapping(value = {"/"})
-    public String welcome() {
-
-        return "Done";
-    }
+    // ------------------  start Service -----------------------------
+//    @CrossOrigin
+//    @RequestMapping(value = {"/"})
+//    public String welcome() {
+//
+//        return "Done";
+//    }
 
     // ------------- Bean For Cach ------------------------
     // simple
