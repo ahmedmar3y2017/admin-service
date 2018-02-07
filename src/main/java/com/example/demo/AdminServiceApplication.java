@@ -18,6 +18,7 @@ import org.springframework.cache.concurrent.ConcurrentMapCacheManager;
 import org.springframework.cache.guava.GuavaCacheManager;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.Bean;
+import org.springframework.mobile.device.Device;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -48,9 +49,10 @@ public class AdminServiceApplication implements CommandLineRunner {
     }
 
     @CrossOrigin
-    @RequestMapping(value = {"/", "/rest/hello"})
+    @RequestMapping(value = {"/"})
     public String welcome() {
-        return "Hello World!!";
+
+        return "Done";
     }
 
     // ------------- Bean For Cach ------------------------
