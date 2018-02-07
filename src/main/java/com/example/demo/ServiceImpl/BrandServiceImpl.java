@@ -4,6 +4,9 @@ import com.example.demo.DaoImpl.BrandDaoImpl;
 import com.example.demo.Service.BrandService;
 import com.example.demo.entities.Brands;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -22,21 +25,25 @@ public class BrandServiceImpl implements BrandService {
         return brandDao.saveBrands(brands);
     }
 
+    @CachePut(value = "brandCache", key = "#id")
     @Override
     public Brands updateBrands(int id, Brands brands) {
         return brandDao.updateBrands(id, brands);
     }
 
+    @CacheEvict(value = "brandCache", key = "#id")
     @Override
     public int deleteBrandsById(int id) {
         return brandDao.deleteBrandsById(id);
     }
 
+    @Cacheable(value = "brandCache", key = "#id", unless = "#result==null")
     @Override
     public Brands getBrandsById(int id) {
         return brandDao.getBrandsById(id);
     }
 
+    @Cacheable(value = "brandCache", unless = "#result==null")
     @Override
     public List<Brands> getAll() {
         return brandDao.getAll();

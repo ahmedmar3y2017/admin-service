@@ -115,7 +115,7 @@ public class BusinessRest {
 	}
 
 
-	// Update
+	// Update General
 	@ApiOperation(value = "Update Avaliable Business",response = Business.class)
 	@ApiResponses(value = {
 			@ApiResponse(code = 200, message = "Successfully Updated "),
@@ -137,6 +137,9 @@ public class BusinessRest {
 
 		}
 	}
+	// Update Password
+
+
 
 	// Delete Business Account From System
 	@ApiOperation(value = "Delete Available Business",response = String.class)

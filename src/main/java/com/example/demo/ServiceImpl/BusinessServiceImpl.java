@@ -40,14 +40,14 @@ public class BusinessServiceImpl implements BusinessService {
         return business.deleteBusinessById(id);
     }
 
-    @Cacheable(value = "businessCache", key = "#id" , unless="#result==null")
+    @Cacheable(value = "businessCache", key = "#id", unless = "#result==null")
     @Override
     public Business getBusinessById(int id) {
         // TODO Auto-generated method stub
         return business.getBusinessById(id);
     }
 
-    @Cacheable(value = "businessCache" , unless="#result==null")
+    @Cacheable(value = "businessCache", unless = "#result==null")
     @Override
     public List<Business> getAll() {
         return business.getAll();

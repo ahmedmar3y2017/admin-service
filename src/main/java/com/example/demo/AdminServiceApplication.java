@@ -56,20 +56,23 @@ public class AdminServiceApplication implements CommandLineRunner {
 //        return "Done";
 //    }
 
-    // ------------- Bean For Cach ------------------------
+    // ------------- Bean For Simple Cach ------------------------
     // simple
 //    @Bean
 //    public CacheManager cacheManager(){
 //        return new ConcurrentMapCacheManager("businessCache" );
 //    }
-    // guava
-    @Bean
-    public CacheManager cacheManager() {
-        GuavaCacheManager cacheManager = new GuavaCacheManager();
-        cacheManager.setCacheBuilder(CacheBuilder.newBuilder().expireAfterWrite(24, TimeUnit.HOURS));
-        cacheManager.setCacheNames(Arrays.asList("businessCache"));
-        return cacheManager;
-    }
+
+
+    //  -------------------------- guava cache --------------------------
+//    @Bean
+//    public CacheManager cacheManager() {
+//        GuavaCacheManager cacheManager = new GuavaCacheManager();
+//        cacheManager.setCacheBuilder(CacheBuilder.newBuilder().expireAfterWrite(24, TimeUnit.HOURS));
+//        cacheManager.setCacheNames(Arrays.asList("businessCache", "adminCache",
+//                "brandCache", "categoryCache", "productCache"));
+//        return cacheManager;
+//    }
 
 
     // on run App

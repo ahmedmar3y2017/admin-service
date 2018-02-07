@@ -31,7 +31,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //                authorizeRequests().antMatchers("/rest/**").hasAnyRole("admin").
 //                and().httpBasic().realmName("WebService security application")
 //                .authenticationEntryPoint(authenticationEntryPoint);
-        http
+        http.csrf().disable()
                 .authorizeRequests()
                 .antMatchers("/").permitAll()
                 .anyRequest().authenticated()

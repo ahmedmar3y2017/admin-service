@@ -213,8 +213,39 @@ public class ProductRest {
 
 
     }
-    // ------------------------- Put Methods ***************************
 
+    // -------------------------  Update Methods --------------------------------
+
+    @ApiOperation(value = "Update Avaliable Product", response = Product.class)
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Successfully Updated "),
+            @ApiResponse(code = 401, message = "You are not authorized to view the resource"),
+            @ApiResponse(code = 403, message = "Accessing the resource you were trying to reach is forbidden"),
+            @ApiResponse(code = 404, message = "The resource you were trying to reach is not found")
+    }
+    )
+    @RequestMapping(value = "/business/{businessid}/product/{productid}", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE,
+            produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    public ResponseEntity<?> Updateproduct(@PathVariable("businessid") int businessid, @PathVariable("productid") int productid, @RequestBody Product product) {
+        Business business = businessServiceImpl.getBusinessById(businessid);
+        if (business == null) {
+
+            return new ResponseEntity<String>("Business Not Found !!", HttpStatus.NOT_FOUND);
+        } else {
+
+
+            Product product1 = productService.updateProduct(productid, product);
+            if (product1 == null) {
+                return new ResponseEntity<String>("Product Not Found !!", HttpStatus.NOT_FOUND);
+
+            } else {
+                return new ResponseEntity<Product>(product1, HttpStatus.OK);
+
+            }
+        }
+
+
+    }
 
 
     // --------------------------- Delete Methods --------------------------------------
