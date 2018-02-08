@@ -47,7 +47,7 @@ public class BusinessServiceImpl implements BusinessService {
         return business.getBusinessById(id);
     }
 
-    @Cacheable(value = "businessCache", unless = "#result==null")
+//    @Cacheable(value = "businessCache", unless = "#result==null")
     @Override
     public List<Business> getAll() {
         return business.getAll();

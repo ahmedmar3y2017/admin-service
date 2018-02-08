@@ -18,5 +18,6 @@ public interface ProductService {
     public List<Product> getAll();
     public int deleteProductByBusinessId(int businessid);
     public int deleteProductByCategoryId(int categoryid);
+    public int deleteProductByBrandId(int brandid);
 
 }

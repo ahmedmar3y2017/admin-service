@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
 //import com.example.demo.Swagger.SwaggerConfig;
+import com.example.demo.MailConfig.EmailServiceImpl;
 import com.example.demo.ServiceImpl.ProductServiceImpl;
 import com.google.common.cache.CacheBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,7 @@ import org.springframework.cache.concurrent.ConcurrentMapCacheManager;
 import org.springframework.cache.guava.GuavaCacheManager;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.Bean;
+import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mobile.device.Device;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -35,7 +37,10 @@ import com.example.demo.entities.Business;
 
 
 public class AdminServiceApplication implements CommandLineRunner {
-
+    @Autowired
+    public EmailServiceImpl emailService;
+    @Autowired
+    public SimpleMailMessage template;
 
     public static void main(String[] args) {
         ConfigurableApplicationContext configurableApplicationContext = SpringApplication.run(AdminServiceApplication.class, args);
@@ -56,28 +61,16 @@ public class AdminServiceApplication implements CommandLineRunner {
 //        return "Done";
 //    }
 
-    // ------------- Bean For Simple Cach ------------------------
-    // simple
-//    @Bean
-//    public CacheManager cacheManager(){
-//        return new ConcurrentMapCacheManager("businessCache" );
-//    }
-
-
-    //  -------------------------- guava cache --------------------------
-//    @Bean
-//    public CacheManager cacheManager() {
-//        GuavaCacheManager cacheManager = new GuavaCacheManager();
-//        cacheManager.setCacheBuilder(CacheBuilder.newBuilder().expireAfterWrite(24, TimeUnit.HOURS));
-//        cacheManager.setCacheNames(Arrays.asList("businessCache", "adminCache",
-//                "brandCache", "categoryCache", "productCache"));
-//        return cacheManager;
-//    }
-
 
     // on run App
     @Override
     public void run(String... args) throws Exception {
+
+//        emailService.sendSimpleMessage("ahmedmar3y108108@gmail.com", "BusinessIn App" ,"BusinessIn App");
+
+//        emailService.sendSimpleMessageUsingTemplate("ahmedmar3y108@gmail.com", "BusinessIn App Subject", template, "BusinessIn App args");
+
+emailService.sendMessageWithAttachment("ahmedmar3y108@gmail.com","ahmed","<h1>ahmed mar3y<h1>","");
 //        System.err.println("Done ya man ");
     }
 

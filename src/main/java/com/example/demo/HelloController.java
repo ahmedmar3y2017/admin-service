@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class HelloController {
 
 
-    // check Device type and platform
+    // check Device type and platform when login or sign up
     @RequestMapping("/")
     public String greeting(Device device) {
         String deviceType = "browser";

@@ -21,4 +21,7 @@ public interface ProductDao {
     public int deleteProductByBusinessId(int businessid);
 
     public int deleteProductByCategoryId(int categoryid);
+
+    public int deleteProductByBrandId(int brandid);
+
 }

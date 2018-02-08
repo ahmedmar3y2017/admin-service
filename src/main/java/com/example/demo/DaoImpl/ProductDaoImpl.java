@@ -154,4 +154,23 @@ public class ProductDaoImpl implements ProductDao {
 
         }
     }
+
+    @Override
+    public int deleteProductByBrandId(int brandid) {
+        Session session = sessionFactory.openSession();
+
+        Category category = session.get(Category.class, brandid);
+        if (category == null) {
+            return 0;
+        } else {
+            session.beginTransaction();
+
+            Query query = session.createQuery("delete  com.example.demo.entities.Product p where p.brands.id=:id ");
+            query.setParameter("id", brandid);
+            query.executeUpdate();
+            session.getTransaction().commit();
+            return 1;
+
+        }
+    }
 }

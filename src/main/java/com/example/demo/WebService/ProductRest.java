@@ -126,9 +126,9 @@ public class ProductRest {
             @ApiResponse(code = 404, message = "The resource you were trying to reach is not found")
     }
     )
-    @RequestMapping(value = "/business/{categoryid}/product", method = RequestMethod.GET, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE,
+    @RequestMapping(value = "/business/{brandid}/product", method = RequestMethod.GET, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE,
             produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    public ResponseEntity<?> GetAllByBusiness(@PathVariable("categoryid") int businessid) {
+    public ResponseEntity<?> GetAllByBusiness(@PathVariable("brandid") int businessid) {
 
         // check Business Exists
         Business business = businessServiceImpl.getBusinessById(businessid);
@@ -160,9 +160,9 @@ public class ProductRest {
             @ApiResponse(code = 404, message = "The resource you were trying to reach is not found")
     }
     )
-    @RequestMapping(value = "/category/{categoryid}/product", method = RequestMethod.GET, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE,
+    @RequestMapping(value = "/category/{brandid}/product", method = RequestMethod.GET, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE,
             produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    public ResponseEntity<?> GetAllByCategory(@PathVariable("categoryid") int categoryid) {
+    public ResponseEntity<?> GetAllByCategory(@PathVariable("brandid") int categoryid) {
 
         // check Category Exists
         Category category = categoryService.getCategoryById(categoryid);
@@ -214,6 +214,30 @@ public class ProductRest {
 
     }
 
+    // get product by Id
+    @ApiOperation(value = "View available Product", response = Product.class)
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Successfully retrieved "),
+            @ApiResponse(code = 401, message = "You are not authorized to view the resource"),
+            @ApiResponse(code = 403, message = "Accessing the resource you were trying to reach is forbidden"),
+            @ApiResponse(code = 404, message = "The resource you were trying to reach is not found")
+    }
+    )
+    @RequestMapping(value = "/product/{id}", method = RequestMethod.GET, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE,
+            produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    public ResponseEntity<?> GetspecificProduct(@PathVariable("id") int id) {
+
+        Product product = productService.getProductById(id);
+        if (product == null) {
+            return new ResponseEntity<String>("product Not Found !!",
+                    HttpStatus.NOT_FOUND);
+
+        } else {
+            return new ResponseEntity<Product>(product, HttpStatus.OK);
+
+        }
+    }
+
     // -------------------------  Update Methods --------------------------------
 
     @ApiOperation(value = "Update Avaliable Product", response = Product.class)
@@ -224,24 +248,18 @@ public class ProductRest {
             @ApiResponse(code = 404, message = "The resource you were trying to reach is not found")
     }
     )
-    @RequestMapping(value = "/business/{businessid}/product/{productid}", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE,
+    @RequestMapping(value = "/product/{productid}", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE,
             produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    public ResponseEntity<?> Updateproduct(@PathVariable("businessid") int businessid, @PathVariable("productid") int productid, @RequestBody Product product) {
-        Business business = businessServiceImpl.getBusinessById(businessid);
-        if (business == null) {
+    public ResponseEntity<?> Updateproduct(
+            @PathVariable("productid") int productid
+            , @RequestBody Product product) {
+        Product product1 = productService.updateProduct(productid, product);
+        if (product1 == null) {
+            return new ResponseEntity<String>("Product Not Found !!", HttpStatus.NOT_FOUND);
 
-            return new ResponseEntity<String>("Business Not Found !!", HttpStatus.NOT_FOUND);
         } else {
+            return new ResponseEntity<Product>(product1, HttpStatus.OK);
 
-
-            Product product1 = productService.updateProduct(productid, product);
-            if (product1 == null) {
-                return new ResponseEntity<String>("Product Not Found !!", HttpStatus.NOT_FOUND);
-
-            } else {
-                return new ResponseEntity<Product>(product1, HttpStatus.OK);
-
-            }
         }
 
 
@@ -281,9 +299,9 @@ public class ProductRest {
             @ApiResponse(code = 404, message = "The resource you were trying to reach is not found")
     }
     )
-    @RequestMapping(value = "/business/{categoryid}/product", method = RequestMethod.DELETE, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE,
+    @RequestMapping(value = "/business/{brandid}/product", method = RequestMethod.DELETE, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE,
             produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    public ResponseEntity<?> DeleteProductByBusiness(@PathVariable("categoryid") int businessid) {
+    public ResponseEntity<?> DeleteProductByBusiness(@PathVariable("brandid") int businessid) {
         int result = productService.deleteProductByBusinessId(businessid);
         if (result == 0) {
             return new ResponseEntity<String>("Product For Business ( " + businessid + " ) Not Found !!", HttpStatus.NOT_FOUND);
@@ -301,12 +319,32 @@ public class ProductRest {
             @ApiResponse(code = 404, message = "The resource you were trying to reach is not found")
     }
     )
-    @RequestMapping(value = "/category/{categoryid}/product", method = RequestMethod.DELETE, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE,
+    @RequestMapping(value = "/category/{brandid}/product", method = RequestMethod.DELETE, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE,
             produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    public ResponseEntity<?> DeleteProductByCategory(@PathVariable("categoryid") int categoryid) {
+    public ResponseEntity<?> DeleteProductByCategory(@PathVariable("brandid") int categoryid) {
         int result = productService.deleteProductByCategoryId(categoryid);
         if (result == 0) {
             return new ResponseEntity<String>("Product For Category ( " + categoryid + " ) Not Found !!", HttpStatus.NOT_FOUND);
+        } else {
+            return new ResponseEntity<String>("Done Delete Product ", HttpStatus.OK);
+        }
+    }
+
+    // delete by Brand
+    @ApiOperation(value = "Delete Available product By Brand ..", response = String.class)
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Successfully Deleted "),
+            @ApiResponse(code = 401, message = "You are not authorized to view the resource"),
+            @ApiResponse(code = 403, message = "Accessing the resource you were trying to reach is forbidden"),
+            @ApiResponse(code = 404, message = "The resource you were trying to reach is not found")
+    }
+    )
+    @RequestMapping(value = "/brand/{brandid}/product", method = RequestMethod.DELETE, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE,
+            produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    public ResponseEntity<?> DeleteProductByBrand(@PathVariable("brandid") int brandid) {
+        int result = productService.deleteProductByBrandId(brandid);
+        if (result == 0) {
+            return new ResponseEntity<String>("Product For Brand ( " + brandid + " ) Not Found !!", HttpStatus.NOT_FOUND);
         } else {
             return new ResponseEntity<String>("Done Delete Product ", HttpStatus.OK);
         }

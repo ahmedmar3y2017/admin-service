@@ -43,7 +43,7 @@ public class ProductServiceImpl implements ProductService {
         return productDao.getProductById(id);
     }
 
-    @Cacheable(value = "productCache", unless = "#result==null")
+    //    @Cacheable(value = "productCache", unless = "#result==null")
     @Override
     public List<Product> getAll() {
         return productDao.getAll();
@@ -57,9 +57,14 @@ public class ProductServiceImpl implements ProductService {
     }
 
 
-    @Cacheable(value = "categoryCache", key = "#categoryid", unless = "#result==null")
+    @Cacheable(value = "productCache", key = "#categoryid", unless = "#result==null")
     @Override
     public int deleteProductByCategoryId(int categoryid) {
         return productDao.deleteProductByCategoryId(categoryid);
+    }
+
+    @Override
+    public int deleteProductByBrandId(int brandid) {
+        return productDao.deleteProductByBrandId(brandid);
     }
 }

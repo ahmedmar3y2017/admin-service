@@ -166,6 +166,9 @@ public class AdminRest {
 
 
     }
+     // ----------------------- Update Change Password --------------------------------------
+
+
 
     // Delete
     @ApiOperation(value = "Delete Available Admin", response = String.class)
