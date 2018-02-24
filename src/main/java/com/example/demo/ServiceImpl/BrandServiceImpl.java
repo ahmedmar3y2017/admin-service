@@ -43,7 +43,7 @@ public class BrandServiceImpl implements BrandService {
         return brandDao.getBrandsById(id);
     }
 
-//    @Cacheable(value = "brandCache", unless = "#result==null")
+    @Cacheable(value = "brandCache", unless = "#result==null"  )
     @Override
     public List<Brands> getAll() {
         return brandDao.getAll();

@@ -72,6 +72,7 @@ public class EmailServiceImpl implements EmailService {
         } catch (MessagingException e) {
             e.printStackTrace();
         }
+
     }
 
     @Override
