@@ -18,94 +18,72 @@ import java.util.List;
 @Transactional
 @Component
 public class BusinessDaoImpl implements BusinessDao {
-	@Autowired
-	private SessionFactory sessionFactory;
+    @Autowired
+    private SessionFactory sessionFactory;
 
-	@Override
-	public Business saveBusiness(Business business) {
-		Session session = sessionFactory.openSession();
+    @Override
+    public Business saveBusiness(Business business) {
+        Session session = sessionFactory.openSession();
 
-		session.beginTransaction();
-		session.save(business);
+        session.beginTransaction();
+        session.save(business);
 
-		session.getTransaction().commit();
-		return business;
-	}
+        session.getTransaction().commit();
+        return business;
+    }
 
-	@Override
-	public Business updateBusiness(int id, Business b) {
-		Session session = sessionFactory.openSession();
+    @Override
+    public Business updateBusiness(Business b) {
+        Session session = sessionFactory.openSession();
 
-		Business business = session.get(Business.class, id);
 
-		if (business == null) {
-			System.err.println("Not Found");
-			return null;
-		} else {
+        session.beginTransaction();
 
-			business.setUrl(b.getUrl());
-			business.setState(b.getState());
-			business.setPostalCode(b.getPostalCode());
-			business.setPaymentMethods(b.getPaymentMethods());
-			business.setNotes(b.getNotes());
-			business.setName(b.getName());
-			business.setLogo(b.getLogo());
-			business.setEmail(b.getEmail());
-			business.setDescription(b.getDescription());
-			business.setCountry(b.getCountry());
-			business.setContact(b.getContact());
-			business.setCity(b.getCity());
-			business.setAddress(b.getAddress());
-			business.setActive(b.getActive());
+        session.update(b);
 
-			session.beginTransaction();
+        session.getTransaction().commit();
 
-			session.update(business);
 
-			session.getTransaction().commit();
+        return b;
+    }
 
-		}
+    @Override
+    public int deleteBusinessById(int id) {
+        Session session = sessionFactory.openSession();
 
-		return business;
-	}
+        Business business = session.get(Business.class, id);
 
-	@Override
-	public int deleteBusinessById(int id) {
-		Session session = sessionFactory.openSession();
+        if (business == null) {
+            return 0;
 
-		Business business = session.get(Business.class, id);
+        } else {
 
-		if (business == null) {
-			return 0;
+            session.beginTransaction();
 
-		} else {
+            session.delete(business);
 
-			session.beginTransaction();
+            session.getTransaction().commit();
 
-			session.delete(business);
+            return 1;
+        }
 
-			session.getTransaction().commit();
+    }
 
-			return 1;
-		}
+    @Override
+    public Business getBusinessById(int id) {
+        Session session = sessionFactory.openSession();
 
-	}
+        Business business = session.get(Business.class, id);
+        return business;
+    }
 
-	@Override
-	public Business getBusinessById(int id) {
-		Session session = sessionFactory.openSession();
+    @Override
+    public List<Business> getAll() {
+        Session session = sessionFactory.openSession();
 
-		Business business = session.get(Business.class, id);
-		return business;
-	}
-
-	@Override
-	public List<Business> getAll() {
-		Session session = sessionFactory.openSession();
-
-		Criteria criteria = session.createCriteria(Business.class);
-		List<Business> list =criteria.list();
-		return list;
-	}
+        Criteria criteria = session.createCriteria(Business.class);
+        List<Business> list = criteria.list();
+        return list;
+    }
 
 }

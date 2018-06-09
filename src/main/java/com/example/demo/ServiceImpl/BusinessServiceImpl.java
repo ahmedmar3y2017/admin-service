@@ -26,11 +26,11 @@ public class BusinessServiceImpl implements BusinessService {
         return business.saveBusiness(busines);
     }
 
-    @CachePut(value = "businessCache", key = "#id")
+    //    @CachePut(value = "businessCache")
     @Override
-    public Business updateBusiness(int id, Business b) {
+    public Business updateBusiness(Business b) {
         // TODO Auto-generated method stub
-        return business.updateBusiness(id, b);
+        return business.updateBusiness(b);
     }
 
     @CacheEvict(value = "businessCache", key = "#id")
@@ -47,7 +47,7 @@ public class BusinessServiceImpl implements BusinessService {
         return business.getBusinessById(id);
     }
 
-//    @Cacheable(value = "businessCache", unless = "#result==null")
+    //    @Cacheable(value = "businessCache", unless = "#result==null")
     @Override
     public List<Business> getAll() {
         return business.getAll();

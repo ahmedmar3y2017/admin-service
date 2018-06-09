@@ -6,12 +6,13 @@ import java.util.List;
 
 public interface BusinessDao {
 
-	public Business saveBusiness(Business business);
+    public Business saveBusiness(Business business);
 
-	public Business updateBusiness(int id, Business b);
+    public Business updateBusiness(Business b);
 
-	public int deleteBusinessById(int id);
+    public int deleteBusinessById(int id);
 
-	public Business getBusinessById(int id);
-	public List<Business> getAll();
+    public Business getBusinessById(int id);
+
+    public List<Business> getAll();
 }
