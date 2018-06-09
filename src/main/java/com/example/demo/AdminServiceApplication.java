@@ -37,10 +37,12 @@ import com.example.demo.entities.Business;
 
 
 public class AdminServiceApplication implements CommandLineRunner {
-    @Autowired
-    public EmailServiceImpl emailService;
-    @Autowired
-    public SimpleMailMessage template;
+    // -------- new Updated  --------
+
+//    @Autowired
+//    public EmailServiceImpl emailService;
+//    @Autowired
+//    public SimpleMailMessage template;
 
     public static void main(String[] args) {
         ConfigurableApplicationContext configurableApplicationContext = SpringApplication.run(AdminServiceApplication.class, args);
@@ -70,7 +72,7 @@ public class AdminServiceApplication implements CommandLineRunner {
 
 //        emailService.sendSimpleMessageUsingTemplate("ahmedmar3y108@gmail.com", "BusinessIn App Subject", template, "BusinessIn App args");
 
-emailService.sendMessageWithAttachment("ahmedmar3y108@gmail.com","ahmed","<h1>ahmed mar3y<h1>","");
+//emailService.sendMessageWithAttachment("ahmedmar3y108@gmail.com","ahmed","<h1>ahmed mar3y<h1>","");
 //        System.err.println("Done ya man ");
     }
 

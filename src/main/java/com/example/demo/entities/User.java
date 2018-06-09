@@ -1,6 +1,5 @@
 package com.example.demo.entities;
 
-import org.springframework.security.core.GrantedAuthority;
 
 import java.util.Date;
 import java.util.List;

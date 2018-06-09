@@ -25,7 +25,7 @@ public class BeanConfig {
         }
         return entityManagerFactory.unwrap(SessionFactory.class);
     }
-
+// -------- new Updated  --------
     @Bean
     public SimpleMailMessage templateSimpleMessage() {
         SimpleMailMessage message = new SimpleMailMessage();
