@@ -99,7 +99,7 @@ public class AdminRest {
 
     }
 
-    // getById
+    // getBy admin By Id Business
     @ApiOperation(value = "View available Admin", response = Admin.class)
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Successfully retrieved "),
@@ -133,6 +133,26 @@ public class AdminRest {
 
     }
 
+    // get admin by Id
+    @RequestMapping(value = "/admin/{adminid}", method = RequestMethod.GET, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE,
+            produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    public ResponseEntity<?> GetspecificAdmin(@PathVariable("adminid") int adminid) {
+
+
+        Admin admin = adminServiceImpl.getAdminById(adminid);
+
+        if (admin == null) {
+            return new ResponseEntity<String>("Admin Not Found !!", HttpStatus.NOT_FOUND);
+
+        } else {
+            return new ResponseEntity<Admin>(admin, HttpStatus.OK);
+
+        }
+
+
+    }
+
+
     // Update
     @ApiOperation(value = "Update Avaliable Admin", response = Admin.class)
     @ApiResponses(value = {
@@ -142,9 +162,9 @@ public class AdminRest {
             @ApiResponse(code = 404, message = "The resource you were trying to reach is not found")
     }
     )
-    @RequestMapping(value = "/business/{businessid}/admin/{adminid}", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE,
+    @RequestMapping(value = "/business/{businessid}/admin", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE,
             produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    public ResponseEntity<?> UpdateAdmin(@PathVariable("businessid") int businessid, @PathVariable("adminid") int adminid, @RequestBody Admin admin) {
+    public ResponseEntity<?> UpdateAdminByBusiness(@PathVariable("businessid") int businessid, @RequestBody Admin admin) {
 
 
         Business business = businessServiceImpl.getBusinessById(businessid);
@@ -152,9 +172,7 @@ public class AdminRest {
 
             return new ResponseEntity<String>("Business Not Found !!", HttpStatus.NOT_FOUND);
         } else {
-
-
-            Admin aadmin = adminServiceImpl.updateAdmin(adminid, admin);
+            Admin aadmin = adminServiceImpl.updateAdmin(admin);
             if (aadmin == null) {
                 return new ResponseEntity<String>("Admin Not Found !!", HttpStatus.NOT_FOUND);
 
@@ -166,8 +184,6 @@ public class AdminRest {
 
 
     }
-     // ----------------------- Update Change Password --------------------------------------
-
 
 
     // Delete
@@ -188,7 +204,8 @@ public class AdminRest {
 
             return new ResponseEntity<String>("Business Not Found !!", HttpStatus.NOT_FOUND);
         } else {
-            int result = adminServiceImpl.deleteAdminById(adminid);
+            // change Available
+            int result = adminServiceImpl.deleteAdminByAvailable(adminid);
             if (result == 0) {
                 return new ResponseEntity<String>("Admin Not Found !!", HttpStatus.NOT_FOUND);
 

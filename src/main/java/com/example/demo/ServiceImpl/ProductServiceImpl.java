@@ -25,13 +25,11 @@ public class ProductServiceImpl implements ProductService {
         return productDao.saveProduct(product);
     }
 
-    @CachePut(value = "productCache", key = "#id")
     @Override
     public Product updateProduct(int id, Product product) {
         return productDao.updateProduct(id, product);
     }
 
-    @CacheEvict(value = "productCache", key = "#id")
     @Override
     public int deleteProductById(int id) {
         return productDao.deleteProductById(id);
@@ -50,14 +48,12 @@ public class ProductServiceImpl implements ProductService {
     }
 
 
-    @Cacheable(value = "productCache", key = "#businessid", unless = "#result==null")
     @Override
     public int deleteProductByBusinessId(int businessid) {
         return productDao.deleteProductByBusinessId(businessid);
     }
 
 
-    @Cacheable(value = "productCache", key = "#categoryid", unless = "#result==null")
     @Override
     public int deleteProductByCategoryId(int categoryid) {
         return productDao.deleteProductByCategoryId(categoryid);

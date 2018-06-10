@@ -6,13 +6,16 @@ public interface AdminDao {
     public Admin saveAdmin(Admin admin);
 
 
-    public Admin updateAdmin(int id, Admin admin);
+    public Admin updateAdmin(Admin admin);
 
     public int deleteAdminById(int id);
 
     public Admin getAdminById(int id);
 
     public Admin getAdminByUsername(String username);
+
+    public int deleteAdminByAvailable(int adminid);
+
 //	public List<Admin>  getAllAdminByBusinessId(int businessId);
 
 }

@@ -11,7 +11,7 @@ public class User {
     protected String email;
     protected String password;
     protected Integer active;
-    protected Integer phone;
+    protected String phone;
     protected String address1;
     protected String address2;
     protected String city;
@@ -20,12 +20,8 @@ public class User {
     protected Integer postalCode;
     protected Date lastActive;
     protected Date registerDate;
-    protected Integer enabled;
     protected String role;
     protected String username;
-
-
-
 
 
 }

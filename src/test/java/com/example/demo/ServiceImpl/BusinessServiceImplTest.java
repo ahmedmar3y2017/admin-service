@@ -27,29 +27,29 @@ import com.example.demo.entities.Business;
 
 public class BusinessServiceImplTest {
 
-	@Autowired
-	private TestEntityManager entityManager;
-	@Autowired
-	BusinessServiceImpl businessServiceImpl;
+    @Autowired
+    private TestEntityManager entityManager;
+    @Autowired
+    BusinessServiceImpl businessServiceImpl;
 
-	@Test
-	public void SaveBusiness() {
+    @Test
+    public void SaveBusiness() {
 
-		Business business = createBusiness();
+        Business business = createBusiness();
 
-		Business SavedInDb = entityManager.persist(business);
+        Business SavedInDb = entityManager.persist(business);
 
-		Business FromDb = businessServiceImpl.getBusinessById(SavedInDb.getId());
+        Business FromDb = businessServiceImpl.getBusinessById(SavedInDb.getId());
 
-		assertThat(SavedInDb).isEqualTo(FromDb);
+        assertThat(SavedInDb).isEqualTo(FromDb);
 
-	}
+    }
 
-	private Business createBusiness() {
+    private Business createBusiness() {
 
-		Business business = new Business("eslam", "123", "logooo", "123456789", "ahmedtttt@gmail.com", "tanta", "tanta",
-				"tant", "tantaaa", 123, "url", "desc", "notes", "paypal", 0);
+        Business business = new Business("eslam", "123", "logooo", "123456789", "ahmedtttt@gmail.com", "tanta", "tanta",
+                "tant", "tantaaa", 123, "url", "desc", "notes", "paypal", 0, true);
 
-		return business;
-	}
+        return business;
+    }
 }

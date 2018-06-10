@@ -86,4 +86,28 @@ public class BusinessDaoImpl implements BusinessDao {
         return list;
     }
 
+    @Override
+    public int deleteBusinessByAvailable(int id) {
+
+        Session session = sessionFactory.openSession();
+
+        Business business = session.get(Business.class, id);
+
+        if (business == null) {
+            return 0;
+
+        } else {
+
+            session.beginTransaction();
+            // update flag
+            business.setAvailable(false);
+            session.update(business);
+
+            session.getTransaction().commit();
+
+            return 1;
+        }
+
+    }
+
 }

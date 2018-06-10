@@ -26,13 +26,11 @@ public class CategoryServiceImpl implements CategoryService {
         return category1.saveCategory(category);
     }
 
-    @CachePut(value = "categoryCache", key = "#id")
     @Override
     public Category updateCategory(int id, Category category) {
         return category1.updateCategory(id, category);
     }
 
-    @CacheEvict(value = "categoryCache", key = "#id")
     @Override
     public int deleteCategoryById(int id) {
         return category1.deleteCategoryById(id);

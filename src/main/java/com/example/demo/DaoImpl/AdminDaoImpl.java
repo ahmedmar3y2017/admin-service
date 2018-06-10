@@ -29,41 +29,16 @@ public class AdminDaoImpl implements AdminDao {
     }
 
     @Override
-    public Admin updateAdmin(int id, Admin admin) {
+    public Admin updateAdmin(Admin admin) {
         Session session = sessionFactory.openSession();
+        session.beginTransaction();
 
-        Admin aadmin = session.get(Admin.class, id);
+        session.update(admin);
 
-        if (aadmin == null) {
-            System.err.println("Not Found");
-            return null;
-        } else {
+        session.getTransaction().commit();
 
 
-            aadmin.setActive(admin.getActive());
-            aadmin.setAddress1(admin.getAddress1());
-            aadmin.setAddress2(admin.getAddress2());
-            aadmin.setAdminLevel(admin.getAdminLevel());
-            aadmin.setCity(admin.getCity());
-            aadmin.setCountry(admin.getCountry());
-            aadmin.setEmail(admin.getEmail());
-            aadmin.setFirstName(admin.getFirstName());
-            aadmin.setLastActive(admin.getLastActive());
-            aadmin.setPassword(admin.getPassword());
-            aadmin.setPhone(admin.getPhone());
-            aadmin.setPostalCode(admin.getPostalCode());
-            aadmin.setRegisterDate(admin.getRegisterDate());
-            aadmin.setState(admin.getState());
-            aadmin.setBusiness(admin.getBusiness());
-            session.beginTransaction();
-
-            session.update(aadmin);
-
-            session.getTransaction().commit();
-
-        }
-
-        return aadmin;
+        return admin;
     }
 
     @Override
@@ -105,6 +80,30 @@ public class AdminDaoImpl implements AdminDao {
         Admin admin = (Admin) criteria.uniqueResult();
 
         return admin;
+
+
+    }
+
+    @Override
+    public int deleteAdminByAvailable(int adminid) {
+        Session session = sessionFactory.openSession();
+
+        Admin business = session.get(Admin.class, adminid);
+
+        if (business == null) {
+            return 0;
+
+        } else {
+
+            session.beginTransaction();
+            // update flag
+            business.setAvailable(false);
+            session.update(business);
+
+            session.getTransaction().commit();
+
+            return 1;
+        }
 
 
     }

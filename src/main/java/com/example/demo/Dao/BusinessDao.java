@@ -15,4 +15,6 @@ public interface BusinessDao {
     public Business getBusinessById(int id);
 
     public List<Business> getAll();
+
+    public int deleteBusinessByAvailable(int id);
 }

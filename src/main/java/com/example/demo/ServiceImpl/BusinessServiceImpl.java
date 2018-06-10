@@ -33,7 +33,6 @@ public class BusinessServiceImpl implements BusinessService {
         return business.updateBusiness(b);
     }
 
-    @CacheEvict(value = "businessCache", key = "#id")
     @Override
     public int deleteBusinessById(int id) {
         // TODO Auto-generated method stub
@@ -51,6 +50,15 @@ public class BusinessServiceImpl implements BusinessService {
     @Override
     public List<Business> getAll() {
         return business.getAll();
+    }
+
+
+    // update flag =0
+    @Override
+    public int deleteBusinessByAvailable(int id) {
+
+
+        return business.deleteBusinessByAvailable(id);
     }
 
 }

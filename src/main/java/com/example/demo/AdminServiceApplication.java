@@ -39,6 +39,12 @@ import com.example.demo.entities.Business;
 public class AdminServiceApplication implements CommandLineRunner {
     // -------- new Updated  --------
 
+
+    @Autowired
+    BusinessServiceImpl businessService;
+    @Autowired
+    AdminServiceImpl adminService;
+
 //    @Autowired
 //    public EmailServiceImpl emailService;
 //    @Autowired
@@ -68,6 +74,39 @@ public class AdminServiceApplication implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
 
+
+/*
+*
+* String name, String password, String logo, String contact, String email, String address,
+                    String city, String state, String country, Integer postalCode, String url, String description, String notes,
+                    String paymentMethods, Integer active, boolean available
+* */
+
+        /*
+
+
+         *Business business, String adminLevel, String firstName, String lastName, String email, String password,
+                 Integer active, Integer phone, String address1, String address2, String city, String state, String country,
+                 Integer postalCode, Date lastActive, Date registerDate, boolean available
+         *
+         * */
+        int siz = businessService.getAll().size();
+        if (siz <= 0) {
+            Business business = businessService.saveBusiness(new Business("admin", "$2a$10$vuVscYda3P7lH4gdGvkLbuPIM7X7TfGZBeV/yjjjeP5sp86yY7kKK", "logo", "123123", "ahmedmohamedmar3y2017@gmail.com",
+                    "tanta", "tanta", "egypt", "kafr elzayat", 123, "url", "desc", "notes", "paypal", 1, true));
+
+
+            adminService.saveAdmin(new Admin(business, "level1", "ahmed", "mar3y", "ahmedmohamedmar3y2017@gmail.com", "$2a$10$vuVscYda3P7lH4gdGvkLbuPIM7X7TfGZBeV/yjjjeP5sp86yY7kKK", 1, "01201288779", "address1", "address 2 ", "tanta", "Egypt", "country", 1234,
+                    new Date(), new Date(), "admin", "ADMIN", true));
+
+        }
+
+//        else {
+//            Business business = businessService.getAll().get(0);
+//            adminService.saveAdmin(new Admin(business, "level1", "ahmed", "mar3y", "ahmedmohamedmar3@gmail.com", "$2a$10$vuVscYda3P7lH4gdGvkLbuPIM7X7TfGZBeV/yjjjeP5sp86yY7kKK", 1, "012088779", "address1", "address 2 ", "tanta", "Egypt", "country", 1234,
+//                    new Date(), new Date(), "adminadmin", "ADMIN", true));
+//
+//        }
 //        emailService.sendSimpleMessage("ahmedmar3y108108@gmail.com", "BusinessIn App" ,"BusinessIn App");
 
 //        emailService.sendSimpleMessageUsingTemplate("ahmedmar3y108@gmail.com", "BusinessIn App Subject", template, "BusinessIn App args");

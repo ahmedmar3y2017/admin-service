@@ -154,7 +154,7 @@ public class BusinessRest {
             produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public ResponseEntity<?> DeleteTopic(@PathVariable("id") int id) {
         // delete all admins and all products first by cascading option
-        int result = businessServiceImpl.deleteBusinessById(id);
+        int result = businessServiceImpl.deleteBusinessByAvailable(id);
         if (result == 0) {
             return new ResponseEntity<String>("Business Not Found !!", HttpStatus.NOT_FOUND);
 

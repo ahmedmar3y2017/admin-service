@@ -22,7 +22,8 @@ import static javax.persistence.GenerationType.IDENTITY;
 @DynamicInsert
 @DynamicUpdate
 public class Customers extends User implements java.io.Serializable {
-
+	@Column(name = "available", columnDefinition = "boolean default true")
+	private boolean available;
 //	private Integer id;
 //	private String address1;
 //	private String address2;
@@ -41,7 +42,7 @@ public class Customers extends User implements java.io.Serializable {
 	}
 
 	public Customers(String address1, String address2, String city, String state, String country, Integer postalCode,
-			Integer phone, Date lastActive, Date registerDate, Integer creditCard, Set<Cart> carts,
+			String phone, Date lastActive, Date registerDate, Integer creditCard, Set<Cart> carts,
 			Set<Orders> orderses) {
 		this.address1 = address1;
 		this.address2 = address2;
@@ -55,6 +56,14 @@ public class Customers extends User implements java.io.Serializable {
 		this.creditCard = creditCard;
 		this.carts = carts;
 		this.orderses = orderses;
+	}
+
+	public boolean isAvailable() {
+		return available;
+	}
+
+	public void setAvailable(boolean available) {
+		this.available = available;
 	}
 
 	@Id
@@ -124,11 +133,11 @@ public class Customers extends User implements java.io.Serializable {
 	}
 
 	@Column(name = "phone")
-	public Integer getPhone() {
+	public String getPhone() {
 		return this.phone;
 	}
 
-	public void setPhone(Integer phone) {
+	public void setPhone(String phone) {
 		this.phone = phone;
 	}
 
@@ -178,14 +187,7 @@ public class Customers extends User implements java.io.Serializable {
 	public void setOrderses(Set<Orders> orderses) {
 		this.orderses = orderses;
 	}
-	@Column(length = 1)
-	public Integer getEnabled() {
-		return enabled;
-	}
 
-	public void setEnabled(Integer enabled) {
-		this.enabled = enabled;
-	}
 
 	public String getRole() {
 		return role;
