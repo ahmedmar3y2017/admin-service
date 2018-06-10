@@ -25,7 +25,7 @@ public class reportsController {
     public ModelAndView report() {
 
         JasperReportsPdfView view = new JasperReportsPdfView();
-        view.setUrl("classpath:report1.jrxml");
+        view.setUrl("classpath:reports/report1.jrxml");
         view.setApplicationContext(appContext);
 
         Map<String, Object> params = new HashMap<>();
