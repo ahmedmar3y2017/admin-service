@@ -8,8 +8,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 
-import java.sql.Blob;
-import java.sql.Types;
 import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.*;
@@ -31,8 +29,7 @@ public class Product implements java.io.Serializable {
     private Business business;
     private Category category;
     private Double price;
-    @Column(name = "pic")
-    private byte[] pic;
+    private String pic;
     private Double discount;
     private Double quantity;
     private String productName;
@@ -59,7 +56,7 @@ public class Product implements java.io.Serializable {
         this.category = category;
     }
 
-    public Product(Brands brands, Business business, Category category, Double price, byte[] pic, Double discount,
+    public Product(Brands brands, Business business, Category category, Double price, String pic, Double discount,
                    Double quantity, String productName, String productDescription, Double unitWeight, Double unitStock,
                    Integer productAvailable, Integer discountAvailable, String note, Set<OrderDetail> orderDetails,
                    Set<ProductTrans> productTranses, Set<Cart> carts) {
@@ -136,11 +133,12 @@ public class Product implements java.io.Serializable {
         this.price = price;
     }
 
-    public byte[] getPic() {
-        return pic;
+    @Column(name = "pic")
+    public String getPic() {
+        return this.pic;
     }
 
-    public void setPic(byte[] pic) {
+    public void setPic(String pic) {
         this.pic = pic;
     }
 
@@ -225,7 +223,7 @@ public class Product implements java.io.Serializable {
         this.note = note;
     }
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "product", cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "product" , cascade = CascadeType.ALL)
     @JsonIgnore
     public Set<OrderDetail> getOrderDetails() {
         return this.orderDetails;

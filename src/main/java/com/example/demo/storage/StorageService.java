@@ -25,8 +25,6 @@ public class StorageService {
         try {
             if (!file.isEmpty()) {
                 Files.copy(file.getInputStream(), this.rootLocation.resolve(file.getOriginalFilename()));
-
-
             }
         } catch (Exception e) {
             throw new RuntimeException("FAIL!");
