@@ -49,7 +49,7 @@ public class BrandRest {
 
 
     //getById
-    @ApiOperation(value = "View available Brand",response = Brands.class)
+    @ApiOperation(value = "View available Brand", response = Brands.class)
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Successfully retrieved "),
             @ApiResponse(code = 401, message = "You are not authorized to view the resource"),
@@ -75,7 +75,7 @@ public class BrandRest {
     }
 
     // getAll
-    @ApiOperation(value = "View a list of available Brands",response = Brands.class)
+    @ApiOperation(value = "View a list of available Brands", response = Brands.class)
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Successfully retrieved "),
             @ApiResponse(code = 401, message = "You are not authorized to view the resource"),
@@ -85,9 +85,9 @@ public class BrandRest {
     )
     @RequestMapping(value = "/brand", method = RequestMethod.GET, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE,
             produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    public ResponseEntity<?>  GetAll() {
+    public ResponseEntity<?> GetAll() {
         List<Brands> brands = brandService.getAll();
-        if (brands.size()==0) {
+        if (brands.size() == 0) {
             return new ResponseEntity<String>("Brand Not Found !!",
                     HttpStatus.NOT_FOUND);
 
@@ -101,7 +101,7 @@ public class BrandRest {
 
 
     // Update
-    @ApiOperation(value = "Update Avaliable Brands",response = Brands.class)
+    @ApiOperation(value = "Update Avaliable Brands", response = Brands.class)
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Successfully Updated "),
             @ApiResponse(code = 401, message = "You are not authorized to view the resource"),
@@ -124,7 +124,7 @@ public class BrandRest {
     }
 
     // Delete Brand From System
-    @ApiOperation(value = "Delete Available Brand",response = String.class)
+    @ApiOperation(value = "Delete Available Brand", response = String.class)
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Successfully Deleted "),
             @ApiResponse(code = 401, message = "You are not authorized to view the resource"),
@@ -132,7 +132,7 @@ public class BrandRest {
             @ApiResponse(code = 404, message = "The resource you were trying to reach is not found")
     }
     )
-    @RequestMapping(value = "/brand/{id}", method = RequestMethod.DELETE , consumes = MediaType.APPLICATION_JSON_UTF8_VALUE,
+    @RequestMapping(value = "/brand/{id}", method = RequestMethod.DELETE, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE,
             produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public ResponseEntity<?> DeleteBrand(@PathVariable("id") int id) {
         int result = brandService.deleteBrandsById(id);
@@ -145,7 +145,6 @@ public class BrandRest {
         }
 
     }
-
 
 
 }

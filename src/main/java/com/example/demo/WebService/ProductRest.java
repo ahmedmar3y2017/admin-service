@@ -12,11 +12,17 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.util.StreamUtils;
 import org.springframework.web.bind.annotation.*;
+import sun.misc.IOUtils;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
 import java.util.Set;
 
@@ -36,6 +42,21 @@ public class ProductRest {
     BrandServiceImpl brandService;
     @Autowired
     CategoryServiceImpl categoryService;
+
+
+    @RequestMapping(value = "/sid", method = RequestMethod.GET,
+            produces = MediaType.IMAGE_JPEG_VALUE)
+    public ResponseEntity<byte[]> getImage() throws IOException {
+
+//return Image
+        ClassPathResource imgFile = new ClassPathResource("image/sid.jpg");
+        byte[] bytes = StreamUtils.copyToByteArray(imgFile.getInputStream());
+
+        return ResponseEntity
+                .ok()
+                .contentType(MediaType.IMAGE_JPEG)
+                .body(bytes);
+    }
 
 
     // --------------------------------- Insert Method -----------------------------
@@ -226,6 +247,7 @@ public class ProductRest {
     @RequestMapping(value = "/product/{id}", method = RequestMethod.GET, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE,
             produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public ResponseEntity<?> GetspecificProduct(@PathVariable("id") int id) {
+
 
         Product product = productService.getProductById(id);
         if (product == null) {

@@ -7,6 +7,7 @@ import java.util.concurrent.TimeUnit;
 //import com.example.demo.Swagger.SwaggerConfig;
 import com.example.demo.MailConfig.EmailServiceImpl;
 import com.example.demo.ServiceImpl.ProductServiceImpl;
+import com.example.demo.storage.StorageService;
 import com.google.common.cache.CacheBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -30,6 +31,8 @@ import com.example.demo.ServiceImpl.BusinessServiceImpl;
 import com.example.demo.entities.Admin;
 import com.example.demo.entities.Business;
 
+import javax.annotation.Resource;
+
 @RestController
 @SpringBootApplication
 //@EnableResourceServer
@@ -39,6 +42,8 @@ import com.example.demo.entities.Business;
 public class AdminServiceApplication implements CommandLineRunner {
     // -------- new Updated  --------
 
+    @Resource
+    StorageService storageService;
 
     @Autowired
     BusinessServiceImpl businessService;
@@ -100,6 +105,9 @@ public class AdminServiceApplication implements CommandLineRunner {
                     new Date(), new Date(), "admin", "ADMIN", true));
 
         }
+        storageService.deleteAll();
+        storageService.init();
+
 
 //        else {
 //            Business business = businessService.getAll().get(0);
