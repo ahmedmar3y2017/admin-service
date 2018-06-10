@@ -48,7 +48,7 @@ public class ProductDaoImpl implements ProductDao {
             product1.setDiscountAvailable(product.getDiscountAvailable());
             product1.setNote(product.getNote());
             product1.setPic(product.getPic());
-            product1.setProductAvailable(product.getProductAvailable());
+//            product1.setProductAvailable(product.getProductAvailable());
             product1.setPrice(product.getPrice());
             product1.setProductDescription(product.getProductDescription());
             product1.setProductName(product.getProductName());
