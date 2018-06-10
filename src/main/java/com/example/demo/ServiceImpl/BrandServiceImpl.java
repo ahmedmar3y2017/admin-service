@@ -26,8 +26,8 @@ public class BrandServiceImpl implements BrandService {
     }
 
     @Override
-    public Brands updateBrands(int id, Brands brands) {
-        return brandDao.updateBrands(id, brands);
+    public Brands updateBrands(Brands brands) {
+        return brandDao.updateBrands(brands);
     }
 
     @Override
@@ -35,15 +35,20 @@ public class BrandServiceImpl implements BrandService {
         return brandDao.deleteBrandsById(id);
     }
 
-    @Cacheable(value = "brandCache", key = "#id", unless = "#result==null")
+    //    @Cacheable(value = "brandCache", key = "#id", unless = "#result==null")
     @Override
     public Brands getBrandsById(int id) {
         return brandDao.getBrandsById(id);
     }
 
-    @Cacheable(value = "brandCache", unless = "#result==null"  )
+    //    @Cacheable(value = "brandCache", unless = "#result==null"  )
     @Override
     public List<Brands> getAll() {
         return brandDao.getAll();
+    }
+
+    @Override
+    public int deleteBrandsByAvailable(int id) {
+        return brandDao.deleteBrandsByAvailable(id);
     }
 }

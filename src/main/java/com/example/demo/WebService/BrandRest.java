@@ -109,11 +109,11 @@ public class BrandRest {
             @ApiResponse(code = 404, message = "The resource you were trying to reach is not found")
     }
     )
-    @RequestMapping(value = "/brand/{id}", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE,
+    @RequestMapping(value = "/brand", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE,
             produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    public ResponseEntity<?> Update(@RequestBody Brands cat, @PathVariable("id") int id) {
+    public ResponseEntity<?> Update(@RequestBody Brands cat) {
 
-        Brands brands = brandService.updateBrands(id, cat);
+        Brands brands = brandService.updateBrands(cat);
         if (brands == null) {
             return new ResponseEntity<String>("Brands Not Found !!", HttpStatus.NOT_FOUND);
 
@@ -135,7 +135,7 @@ public class BrandRest {
     @RequestMapping(value = "/brand/{id}", method = RequestMethod.DELETE, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE,
             produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public ResponseEntity<?> DeleteBrand(@PathVariable("id") int id) {
-        int result = brandService.deleteBrandsById(id);
+        int result = brandService.deleteBrandsByAvailable(id);
         if (result == 0) {
             return new ResponseEntity<String>("Brand Not Found !!", HttpStatus.NOT_FOUND);
 

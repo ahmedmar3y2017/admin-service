@@ -36,31 +36,18 @@ public class BrandDaoImpl implements BrandDao {
     }
 
     @Override
-    public Brands updateBrands(int id, Brands brands) {
+    public Brands updateBrands(Brands brands) {
 
 
         Session session = sessionFactory.openSession();
 
-        Brands brands1 = session.get(Brands.class, id);
+        session.beginTransaction();
+        session.update(brands);
 
-        if (brands1 == null) {
-            System.err.println("Not Found");
-            return null;
-        } else {
+        session.getTransaction().commit();
 
-            brands1.setDescription(brands.getDescription());
-            brands1.setName(brands.getName());
-            brands1.setUrl(brands.getUrl());
-            brands1.setLogo(brands.getLogo());
-            session.beginTransaction();
 
-            session.update(brands1);
-
-            session.getTransaction().commit();
-
-        }
-
-        return brands1;
+        return brands;
 
 
     }
@@ -111,6 +98,30 @@ public class BrandDaoImpl implements BrandDao {
         List<Brands> list = criteria.list();
         return list;
 
+
+    }
+
+    @Override
+    public int deleteBrandsByAvailable(int id) {
+
+        Session session = sessionFactory.openSession();
+
+        Brands Brands = session.get(Brands.class, id);
+
+        if (Brands == null) {
+            return 0;
+
+        } else {
+
+            session.beginTransaction();
+            // update flag
+            Brands.setAvailable(false);
+            session.update(Brands);
+
+            session.getTransaction().commit();
+
+            return 1;
+        }
 
     }
 }

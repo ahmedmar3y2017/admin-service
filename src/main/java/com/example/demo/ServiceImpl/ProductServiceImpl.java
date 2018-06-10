@@ -35,7 +35,7 @@ public class ProductServiceImpl implements ProductService {
         return productDao.deleteProductById(id);
     }
 
-    @Cacheable(value = "productCache", key = "#id", unless = "#result==null")
+    //    @Cacheable(value = "productCache", key = "#id", unless = "#result==null")
     @Override
     public Product getProductById(int id) {
         return productDao.getProductById(id);

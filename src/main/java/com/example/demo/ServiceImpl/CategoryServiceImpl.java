@@ -43,7 +43,7 @@ public class CategoryServiceImpl implements CategoryService {
         return category1.getCategoryById(id);
     }
 
-//    @Cacheable(value = "categoryCache", unless = "#result==null")
+    @Cacheable(value = "categoryCache", unless = "#result==null")
     @Override
     public List<Category> getAll() {
         return category1.getAll();
