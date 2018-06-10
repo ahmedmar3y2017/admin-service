@@ -26,8 +26,8 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public Product updateProduct(int id, Product product) {
-        return productDao.updateProduct(id, product);
+    public Product updateProduct(Product product) {
+        return productDao.updateProduct(product);
     }
 
     @Override
@@ -62,5 +62,10 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public int deleteProductByBrandId(int brandid) {
         return productDao.deleteProductByBrandId(brandid);
+    }
+
+    @Override
+    public int deleteProductByAvailable(int id) {
+        return productDao.deleteProductByAvailable(id);
     }
 }

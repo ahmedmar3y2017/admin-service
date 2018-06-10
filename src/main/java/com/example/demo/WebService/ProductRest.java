@@ -43,7 +43,7 @@ public class ProductRest {
     @Autowired
     CategoryServiceImpl categoryService;
 
-
+    // get image
     @RequestMapping(value = "/sid", method = RequestMethod.GET,
             produces = MediaType.IMAGE_JPEG_VALUE)
     public ResponseEntity<byte[]> getImage() throws IOException {
@@ -270,12 +270,12 @@ public class ProductRest {
             @ApiResponse(code = 404, message = "The resource you were trying to reach is not found")
     }
     )
-    @RequestMapping(value = "/product/{productid}", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE,
+    @RequestMapping(value = "/product", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE,
             produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public ResponseEntity<?> Updateproduct(
-            @PathVariable("productid") int productid
-            , @RequestBody Product product) {
-        Product product1 = productService.updateProduct(productid, product);
+
+            @RequestBody Product product) {
+        Product product1 = productService.updateProduct(product);
         if (product1 == null) {
             return new ResponseEntity<String>("Product Not Found !!", HttpStatus.NOT_FOUND);
 
@@ -289,7 +289,7 @@ public class ProductRest {
 
 
     // --------------------------- Delete Methods --------------------------------------
-    // Delete Product From System
+    // Delete Product From System by id
     @ApiOperation(value = "Delete Available product", response = String.class)
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Successfully Deleted "),
@@ -301,7 +301,7 @@ public class ProductRest {
     @RequestMapping(value = "/product/{id}", method = RequestMethod.DELETE, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE,
             produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public ResponseEntity<?> DeleteProduct(@PathVariable("id") int id) {
-        int result = productService.deleteProductById(id);
+        int result = productService.deleteProductByAvailable(id);
         if (result == 0) {
             return new ResponseEntity<String>("Product Not Found !!", HttpStatus.NOT_FOUND);
 
@@ -311,6 +311,10 @@ public class ProductRest {
         }
 
     }
+
+
+    // ********************** will updated ************************
+
 
     // delete by businessId
     @ApiOperation(value = "Delete Available product By Business ..", response = String.class)

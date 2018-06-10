@@ -10,14 +10,19 @@ import java.util.List;
 public interface ProductService {
     public Product saveProduct(Product product);
 
-    public Product updateProduct(int id, Product product);
+    public Product updateProduct(Product product);
 
     public int deleteProductById(int id);
 
     public Product getProductById(int id);
+
     public List<Product> getAll();
+
     public int deleteProductByBusinessId(int businessid);
+
     public int deleteProductByCategoryId(int categoryid);
+
     public int deleteProductByBrandId(int brandid);
 
+    int deleteProductByAvailable(int id);
 }

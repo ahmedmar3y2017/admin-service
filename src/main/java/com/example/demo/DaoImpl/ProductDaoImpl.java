@@ -35,37 +35,18 @@ public class ProductDaoImpl implements ProductDao {
     }
 
     @Override
-    public Product updateProduct(int id, Product product) {
+    public Product updateProduct(Product product) {
         Session session = sessionFactory.openSession();
 
-        Product product1 = session.get(Product.class, id);
 
-        if (product1 == null) {
-            return null;
-        } else {
+        session.beginTransaction();
 
-            product1.setDiscount(product.getDiscount());
-            product1.setDiscountAvailable(product.getDiscountAvailable());
-            product1.setNote(product.getNote());
-            product1.setPic(product.getPic());
-//            product1.setProductAvailable(product.getProductAvailable());
-            product1.setPrice(product.getPrice());
-            product1.setProductDescription(product.getProductDescription());
-            product1.setProductName(product.getProductName());
-            product1.setUnitWeight(product.getUnitWeight());
-            product1.setUnitStock(product.getUnitStock());
-            product1.setQuantity(product.getQuantity());
+        session.update(product);
+
+        session.getTransaction().commit();
 
 
-            session.beginTransaction();
-
-            session.update(product1);
-
-            session.getTransaction().commit();
-
-        }
-
-        return product1;
+        return product;
 
 
     }
@@ -171,6 +152,28 @@ public class ProductDaoImpl implements ProductDao {
             session.getTransaction().commit();
             return 1;
 
+        }
+    }
+
+    @Override
+    public int deleteProductByAvailable(int id) {
+        Session session = sessionFactory.openSession();
+
+        Product business = session.get(Product.class, id);
+
+        if (business == null) {
+            return 0;
+
+        } else {
+
+            session.beginTransaction();
+            // update flag
+            business.setProductAvailable(false);
+            session.update(business);
+
+            session.getTransaction().commit();
+
+            return 1;
         }
     }
 }

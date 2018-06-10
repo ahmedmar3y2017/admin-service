@@ -105,8 +105,8 @@ public class AdminServiceApplication implements CommandLineRunner {
                     new Date(), new Date(), "admin", "ADMIN", true));
 
         }
-        storageService.deleteAll();
-        storageService.init();
+//        storageService.deleteAll();
+//        storageService.init();
 
 
 //        else {
