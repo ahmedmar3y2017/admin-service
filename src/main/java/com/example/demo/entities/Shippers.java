@@ -24,13 +24,13 @@ public class Shippers implements java.io.Serializable {
 
     private Integer id;
     private String companyName;
-    private Integer phone;
+    private String phone;
     private Set<Orders> orderses = new HashSet<Orders>(0);
 
     public Shippers() {
     }
 
-    public Shippers(String companyName, Integer phone, Set<Orders> orderses) {
+    public Shippers(String companyName, String phone, Set<Orders> orderses) {
         this.companyName = companyName;
         this.phone = phone;
         this.orderses = orderses;
@@ -58,13 +58,14 @@ public class Shippers implements java.io.Serializable {
     }
 
     @Column(name = "phone")
-    public Integer getPhone() {
-        return this.phone;
+    public String getPhone() {
+        return phone;
     }
 
-    public void setPhone(Integer phone) {
+    public void setPhone(String phone) {
         this.phone = phone;
     }
+
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "shippers", cascade = CascadeType.ALL)
     public Set<Orders> getOrderses() {
