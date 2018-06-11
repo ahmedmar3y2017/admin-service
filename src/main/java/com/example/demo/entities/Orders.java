@@ -115,6 +115,8 @@ public class Orders implements java.io.Serializable {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "paymentid", nullable = false, updatable = false)
+    @JsonIgnore
+
     public Payment getPayment() {
         return this.payment;
     }

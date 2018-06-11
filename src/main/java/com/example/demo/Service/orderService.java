@@ -14,4 +14,6 @@ public interface orderService {
     List<Orders> getAllInWeek();
 
     List<Orders> getAllInMonth();
+    public Orders saveOrders(Orders orders);
+
 }

@@ -6,6 +6,9 @@ import java.util.List;
 
 public interface orderDao {
 
+    public Orders saveOrders(Orders orders);
+
+
     public int deleteOrdersByAvailable(int id);
 
     public Orders getOrdersById(int id);

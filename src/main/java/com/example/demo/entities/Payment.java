@@ -3,6 +3,7 @@ package com.example.demo.entities;
 // default package
 // Generated Nov 23, 2017 7:42:03 PM by Hibernate Tools 5.2.3.Final
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 
@@ -22,57 +23,62 @@ import static javax.persistence.GenerationType.IDENTITY;
 @DynamicUpdate
 public class Payment implements java.io.Serializable {
 
-	private Integer id;
-	private String paymentType;
-	private Integer allowed;
-	private Set<Orders> orderses = new HashSet<Orders>(0);
+    private Integer id;
+    private String paymentType;
+    private Integer allowed;
+    private Set<Orders> orderses = new HashSet<Orders>(0);
 
-	public Payment() {
-	}
+    public Payment() {
+    }
 
-	public Payment(String paymentType, Integer allowed, Set<Orders> orderses) {
-		this.paymentType = paymentType;
-		this.allowed = allowed;
-		this.orderses = orderses;
-	}
+    public Payment(String paymentType, Integer allowed, Set<Orders> orderses) {
+        this.paymentType = paymentType;
+        this.allowed = allowed;
+        this.orderses = orderses;
+    }
 
-	@Id
-	@GeneratedValue(strategy = IDENTITY)
+    public Payment(int paymentId) {
+        this.id = paymentId;
+    }
 
-	@Column(name = "id", unique = true, nullable = false)
-	public Integer getId() {
-		return this.id;
-	}
+    @Id
+    @GeneratedValue(strategy = IDENTITY)
 
-	public void setId(Integer id) {
-		this.id = id;
-	}
+    @Column(name = "id", unique = true, nullable = false)
+    public Integer getId() {
+        return this.id;
+    }
 
-	@Column(name = "paymentType")
-	public String getPaymentType() {
-		return this.paymentType;
-	}
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
-	public void setPaymentType(String paymentType) {
-		this.paymentType = paymentType;
-	}
+    @Column(name = "paymentType")
+    public String getPaymentType() {
+        return this.paymentType;
+    }
 
-	@Column(name = "allowed")
-	public Integer getAllowed() {
-		return this.allowed;
-	}
+    public void setPaymentType(String paymentType) {
+        this.paymentType = paymentType;
+    }
 
-	public void setAllowed(Integer allowed) {
-		this.allowed = allowed;
-	}
+    @Column(name = "allowed")
+    public Integer getAllowed() {
+        return this.allowed;
+    }
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "payment" ,  cascade = CascadeType.ALL)
-	public Set<Orders> getOrderses() {
-		return this.orderses;
-	}
+    public void setAllowed(Integer allowed) {
+        this.allowed = allowed;
+    }
 
-	public void setOrderses(Set<Orders> orderses) {
-		this.orderses = orderses;
-	}
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "payment", cascade = CascadeType.ALL)
+    @JsonIgnore
+    public Set<Orders> getOrderses() {
+        return this.orderses;
+    }
+
+    public void setOrderses(Set<Orders> orderses) {
+        this.orderses = orderses;
+    }
 
 }

@@ -60,6 +60,11 @@ public class Customers extends User implements java.io.Serializable {
         this.orderses = orderses;
     }
 
+    public Customers(int customerId) {
+        super();
+        this.id = customerId;
+    }
+
     public boolean isAvailable() {
         return available;
     }

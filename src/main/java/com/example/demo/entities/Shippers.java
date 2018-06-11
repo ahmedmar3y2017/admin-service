@@ -36,6 +36,10 @@ public class Shippers implements java.io.Serializable {
         this.orderses = orderses;
     }
 
+    public Shippers(int shipperId) {
+        this.id = shipperId;
+    }
+
     @Id
     @GeneratedValue(strategy = IDENTITY)
 
