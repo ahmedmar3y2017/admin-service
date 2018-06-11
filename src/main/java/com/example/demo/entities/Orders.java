@@ -3,6 +3,7 @@ package com.example.demo.entities;
 // default package
 // Generated Nov 23, 2017 7:42:03 PM by Hibernate Tools 5.2.3.Final
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.Where;
@@ -103,6 +104,7 @@ public class Orders implements java.io.Serializable {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "customersid", nullable = false, updatable = false)
+    @JsonIgnore
     public Customers getCustomers() {
         return this.customers;
     }
@@ -123,6 +125,7 @@ public class Orders implements java.io.Serializable {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "shippersid", nullable = false, updatable = false)
+    @JsonIgnore
     public Shippers getShippers() {
         return this.shippers;
     }
@@ -189,6 +192,7 @@ public class Orders implements java.io.Serializable {
 
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "orders", cascade = CascadeType.ALL)
+    @JsonIgnore
     public Set<OrderDetail> getOrderDetails() {
         return this.orderDetails;
     }

@@ -1,5 +1,6 @@
 package com.example.demo.ServiceImpl;
 
+import com.example.demo.DaoImpl.customerDaoImpl;
 import com.example.demo.Service.customerService;
 import com.example.demo.entities.Customers;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +13,7 @@ import java.util.List;
 public class customerServiceImpl implements customerService {
 
     @Autowired
-    customerServiceImpl customerService;
+    customerDaoImpl customerService;
 
 
     @Override
