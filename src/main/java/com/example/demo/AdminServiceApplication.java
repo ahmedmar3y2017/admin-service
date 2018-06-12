@@ -97,7 +97,7 @@ public class AdminServiceApplication implements CommandLineRunner {
          * */
         int siz = businessService.getAll().size();
         if (siz <= 0) {
-            Business business = businessService.saveBusiness(new Business("admin", "$2a$10$vuVscYda3P7lH4gdGvkLbuPIM7X7TfGZBeV/yjjjeP5sp86yY7kKK", "logo", "123123", "ahmedmohamedmar3y2017@gmail.com",
+            Business business = businessService.saveBusiness(new Business("admin", "logo", "123123", "ahmedmohamedmar3y2017@gmail.com",
                     "tanta", "tanta", "egypt", "kafr elzayat", 123, "url", "desc", "notes", "paypal", 1, true));
 
 

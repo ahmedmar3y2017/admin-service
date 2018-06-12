@@ -1,5 +1,6 @@
 package com.example.demo.WebService;
 
+import com.example.demo.Security.EncryptPassword;
 import com.example.demo.ServiceImpl.BusinessServiceImpl;
 import com.example.demo.entities.Business;
 import io.swagger.annotations.ApiOperation;
@@ -55,6 +56,10 @@ public class AdminRest {
 
         }
         // encrypt password before insert Admin
+        String passEncrypt = EncryptPassword.BCryptPassword(admin.getPassword());
+        // change password when inserted
+        admin.setPassword(passEncrypt);
+        // set business id
         admin.setBusiness(new Business(Businessid));
 
         Admin a = adminServiceImpl.saveAdmin(admin);

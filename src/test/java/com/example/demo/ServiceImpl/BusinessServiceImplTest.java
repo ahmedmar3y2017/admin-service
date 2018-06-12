@@ -47,7 +47,7 @@ public class BusinessServiceImplTest {
 
     private Business createBusiness() {
 
-        Business business = new Business("eslam", "123", "logooo", "123456789", "ahmedtttt@gmail.com", "tanta", "tanta",
+        Business business = new Business("eslam",  "logooo", "123456789", "ahmedtttt@gmail.com", "tanta", "tanta",
                 "tant", "tantaaa", 123, "url", "desc", "notes", "paypal", 0, true);
 
         return business;
