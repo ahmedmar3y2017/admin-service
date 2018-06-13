@@ -58,6 +58,10 @@ public class AdminRest {
 
         }
         // encrypt password before insert Admin
+        String passEncrypt = EncryptPassword.BCryptPassword(admin.getPassword());
+        // change password when inserted
+        admin.setPassword(passEncrypt);
+        // set business id
         admin.setBusiness(new Business(Businessid));
 
         Admin a = adminServiceImpl.saveAdmin(admin);

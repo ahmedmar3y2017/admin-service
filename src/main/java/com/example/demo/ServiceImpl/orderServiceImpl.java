@@ -38,4 +38,9 @@ public class orderServiceImpl implements orderService {
     public List<Orders> getAllInMonth() {
         return orderDao.getAllInMonth();
     }
+
+    @Override
+    public Orders saveOrders(Orders orders) {
+        return orderDao.saveOrders(orders);
+    }
 }

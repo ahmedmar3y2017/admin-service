@@ -2,6 +2,7 @@ package com.example.demo.WebService;
 
 import java.util.List;
 
+import com.example.demo.Security.EncryptPassword;
 import com.example.demo.ServiceImpl.AdminServiceImpl;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -52,12 +53,13 @@ public class BusinessRest {
         }
 
         // check email , password
-        if (busines.getEmail() == "" || busines.getPassword() == "") {
+        if (busines.getEmail() == "") {
 
             return new ResponseEntity<String>("Please provide the Email and password", HttpStatus.BAD_REQUEST);
 
         }
-        // encrypt password before insert Business
+
+
         Business b = businessServiceImpl.saveBusiness(busines);
 
         return new ResponseEntity<Business>(b, HttpStatus.CREATED);

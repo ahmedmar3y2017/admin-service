@@ -2,7 +2,10 @@ package com.example.demo.WebService;
 
 
 import com.example.demo.ServiceImpl.orderServiceImpl;
+import com.example.demo.entities.Customers;
 import com.example.demo.entities.Orders;
+import com.example.demo.entities.Payment;
+import com.example.demo.entities.Shippers;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
@@ -10,10 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -35,9 +35,44 @@ public class OrderRest {
      *
      * */
 
+
+    // insert
+    @ApiOperation(value = "View a list of available Orders", response = Orders.class)
+    @ApiResponses(value = {
+            @ApiResponse(code = 201, message = "Successfully Added "),
+            @ApiResponse(code = 401, message = "You are not authorized to view the resource"),
+            @ApiResponse(code = 403, message = "Accessing the resource you were trying to reach is forbidden"),
+            @ApiResponse(code = 204, message = "Not Countent Found"),
+            @ApiResponse(code = 400, message = "bad Request please Fill All parameters ")
+    }
+    )
+    @RequestMapping(value = "/order", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE,
+            produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    public ResponseEntity<?> insert(
+            @RequestParam(required = true, name = "payment", defaultValue = "0") int paymentId,
+            @RequestParam(required = true, name = "shipper", defaultValue = "0") int shipperId,
+            @RequestParam(required = true, name = "customer") int customerId,
+
+            @RequestBody Orders order) {
+        if (order == null) {
+            return new ResponseEntity<String>("Please add Orders details !!", HttpStatus.NO_CONTENT);
+
+        }
+        order.setPayment(new Payment(paymentId));
+        order.setShippers(new Shippers(shipperId));
+        order.setCustomers(new Customers(customerId));
+
+        // encrypt password before insert Orders
+        Orders b = orderService.saveOrders(order);
+
+        return new ResponseEntity<Orders>(b, HttpStatus.CREATED);
+
+    }
+
+
 // get orders in this week
 
-    @ApiOperation(value = "View a list of available Business", response = Orders.class)
+    @ApiOperation(value = "View a list of available Orders", response = Orders.class)
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Successfully retrieved "),
             @ApiResponse(code = 401, message = "You are not authorized to view the resource"),
@@ -64,7 +99,7 @@ public class OrderRest {
 
 // get orders in this month
 
-    @ApiOperation(value = "View a list of available Business", response = Orders.class)
+    @ApiOperation(value = "View a list of available Orders", response = Orders.class)
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Successfully retrieved "),
             @ApiResponse(code = 401, message = "You are not authorized to view the resource"),
@@ -117,7 +152,7 @@ public class OrderRest {
 
     // getAll Orders 
     // getAll
-    @ApiOperation(value = "View a list of available Business", response = Orders.class)
+    @ApiOperation(value = "View a list of available Orders", response = Orders.class)
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Successfully retrieved "),
             @ApiResponse(code = 401, message = "You are not authorized to view the resource"),

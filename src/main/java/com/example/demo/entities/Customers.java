@@ -3,6 +3,7 @@ package com.example.demo.entities;
 // default package
 // Generated Nov 23, 2017 7:42:03 PM by Hibernate Tools 5.2.3.Final
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 
@@ -22,9 +23,9 @@ import static javax.persistence.GenerationType.IDENTITY;
 @DynamicInsert
 @DynamicUpdate
 public class Customers extends User implements java.io.Serializable {
-	@Column(name = "available", columnDefinition = "boolean default true")
-	private boolean available;
-//	private Integer id;
+    @Column(name = "available", columnDefinition = "boolean default true")
+    private boolean available;
+    //	private Integer id;
 //	private String address1;
 //	private String address2;
 //	private String city;
@@ -34,174 +35,182 @@ public class Customers extends User implements java.io.Serializable {
 //	private Integer phone;
 //	private Date lastActive;
 //	private Date registerDate;
-	private Integer creditCard;
-	private Set<Cart> carts = new HashSet<Cart>(0);
-	private Set<Orders> orderses = new HashSet<Orders>(0);
+    private Integer creditCard;
 
-	public Customers() {
-	}
+    private Set<Cart> carts = new HashSet<Cart>(0);
+    private Set<Orders> orderses = new HashSet<Orders>(0);
 
-	public Customers(String address1, String address2, String city, String state, String country, Integer postalCode,
-			String phone, Date lastActive, Date registerDate, Integer creditCard, Set<Cart> carts,
-			Set<Orders> orderses) {
-		this.address1 = address1;
-		this.address2 = address2;
-		this.city = city;
-		this.state = state;
-		this.country = country;
-		this.postalCode = postalCode;
-		this.phone = phone;
-		this.lastActive = lastActive;
-		this.registerDate = registerDate;
-		this.creditCard = creditCard;
-		this.carts = carts;
-		this.orderses = orderses;
-	}
+    public Customers() {
+    }
 
-	public boolean isAvailable() {
-		return available;
-	}
+    public Customers(String address1, String address2, String city, String state, String country, Integer postalCode,
+                     String phone, Date lastActive, Date registerDate, Integer creditCard, Set<Cart> carts,
+                     Set<Orders> orderses) {
+        this.address1 = address1;
+        this.address2 = address2;
+        this.city = city;
+        this.state = state;
+        this.country = country;
+        this.postalCode = postalCode;
+        this.phone = phone;
+        this.lastActive = lastActive;
+        this.registerDate = registerDate;
+        this.creditCard = creditCard;
+        this.carts = carts;
+        this.orderses = orderses;
+    }
 
-	public void setAvailable(boolean available) {
-		this.available = available;
-	}
+    public Customers(int customerId) {
+        super();
+        this.id = customerId;
+    }
 
-	@Id
-	@GeneratedValue(strategy = IDENTITY)
+    public boolean isAvailable() {
+        return available;
+    }
 
-	@Column(name = "id", unique = true, nullable = false)
-	public Integer getId() {
-		return this.id;
-	}
+    public void setAvailable(boolean available) {
+        this.available = available;
+    }
 
-	public void setId(Integer id) {
-		this.id = id;
-	}
+    @Id
+    @GeneratedValue(strategy = IDENTITY)
 
-	@Column(name = "address1")
-	public String getAddress1() {
-		return this.address1;
-	}
+    @Column(name = "id", unique = true, nullable = false)
+    public Integer getId() {
+        return this.id;
+    }
 
-	public void setAddress1(String address1) {
-		this.address1 = address1;
-	}
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
-	@Column(name = "address2")
-	public String getAddress2() {
-		return this.address2;
-	}
+    @Column(name = "address1")
+    public String getAddress1() {
+        return this.address1;
+    }
 
-	public void setAddress2(String address2) {
-		this.address2 = address2;
-	}
+    public void setAddress1(String address1) {
+        this.address1 = address1;
+    }
 
-	@Column(name = "city")
-	public String getCity() {
-		return this.city;
-	}
+    @Column(name = "address2")
+    public String getAddress2() {
+        return this.address2;
+    }
 
-	public void setCity(String city) {
-		this.city = city;
-	}
+    public void setAddress2(String address2) {
+        this.address2 = address2;
+    }
 
-	@Column(name = "state")
-	public String getState() {
-		return this.state;
-	}
+    @Column(name = "city")
+    public String getCity() {
+        return this.city;
+    }
 
-	public void setState(String state) {
-		this.state = state;
-	}
+    public void setCity(String city) {
+        this.city = city;
+    }
 
-	@Column(name = "country")
-	public String getCountry() {
-		return this.country;
-	}
+    @Column(name = "state")
+    public String getState() {
+        return this.state;
+    }
 
-	public void setCountry(String country) {
-		this.country = country;
-	}
+    public void setState(String state) {
+        this.state = state;
+    }
 
-	@Column(name = "postalCode")
-	public Integer getPostalCode() {
-		return this.postalCode;
-	}
+    @Column(name = "country")
+    public String getCountry() {
+        return this.country;
+    }
 
-	public void setPostalCode(Integer postalCode) {
-		this.postalCode = postalCode;
-	}
+    public void setCountry(String country) {
+        this.country = country;
+    }
 
-	@Column(name = "phone")
-	public String getPhone() {
-		return this.phone;
-	}
+    @Column(name = "postalCode")
+    public Integer getPostalCode() {
+        return this.postalCode;
+    }
 
-	public void setPhone(String phone) {
-		this.phone = phone;
-	}
+    public void setPostalCode(Integer postalCode) {
+        this.postalCode = postalCode;
+    }
 
-	@Temporal(TemporalType.DATE)
-	@Column(name = "lastActive", length = 0)
-	public Date getLastActive() {
-		return this.lastActive;
-	}
+    @Column(name = "phone")
+    public String getPhone() {
+        return this.phone;
+    }
 
-	public void setLastActive(Date lastActive) {
-		this.lastActive = lastActive;
-	}
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
 
-	@Temporal(TemporalType.DATE)
-	@Column(name = "registerDate", length = 0)
-	public Date getRegisterDate() {
-		return this.registerDate;
-	}
+    @Temporal(TemporalType.DATE)
+    @Column(name = "lastActive", length = 0)
+    public Date getLastActive() {
+        return this.lastActive;
+    }
 
-	public void setRegisterDate(Date registerDate) {
-		this.registerDate = registerDate;
-	}
+    public void setLastActive(Date lastActive) {
+        this.lastActive = lastActive;
+    }
 
-	@Column(name = "creditCard")
-	public Integer getCreditCard() {
-		return this.creditCard;
-	}
+    @Temporal(TemporalType.DATE)
+    @Column(name = "registerDate", length = 0)
+    public Date getRegisterDate() {
+        return this.registerDate;
+    }
 
-	public void setCreditCard(Integer creditCard) {
-		this.creditCard = creditCard;
-	}
+    public void setRegisterDate(Date registerDate) {
+        this.registerDate = registerDate;
+    }
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "customers" ,  cascade = CascadeType.ALL)
-	public Set<Cart> getCarts() {
-		return this.carts;
-	}
+    @Column(name = "creditCard")
+    public Integer getCreditCard() {
+        return this.creditCard;
+    }
 
-	public void setCarts(Set<Cart> carts) {
-		this.carts = carts;
-	}
+    public void setCreditCard(Integer creditCard) {
+        this.creditCard = creditCard;
+    }
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "customers" ,  cascade = CascadeType.ALL)
-	public Set<Orders> getOrderses() {
-		return this.orderses;
-	}
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "customers", cascade = CascadeType.ALL)
+    @JsonIgnore
+    public Set<Cart> getCarts() {
+        return this.carts;
+    }
 
-	public void setOrderses(Set<Orders> orderses) {
-		this.orderses = orderses;
-	}
+    public void setCarts(Set<Cart> carts) {
+        this.carts = carts;
+    }
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "customers", cascade = CascadeType.ALL)
+    @JsonIgnore
+    public Set<Orders> getOrderses() {
+        return this.orderses;
+    }
+
+    public void setOrderses(Set<Orders> orderses) {
+        this.orderses = orderses;
+    }
 
 
-	public String getRole() {
-		return role;
-	}
+    public String getRole() {
+        return role;
+    }
 
-	public void setRole(String role) {
-		this.role = role;
-	}
+    public void setRole(String role) {
+        this.role = role;
+    }
 
-	public String getUsername() {
-		return username;
-	}
+    public String getUsername() {
+        return username;
+    }
 
-	public void setUsername(String username) {
-		this.username = username;
-	}
+    public void setUsername(String username) {
+        this.username = username;
+    }
 }

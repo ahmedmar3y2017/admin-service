@@ -29,7 +29,7 @@ public class Business {
 
     private Integer id;
     private String name;
-    private String password;
+
     private String logo;
     private String contact;
     @Column(name = "available", columnDefinition = "boolean default true")
@@ -53,12 +53,12 @@ public class Business {
     public Business() {
     }
 
-    public Business(String name, String password, String logo, String contact, String email, String address,
+    public Business(String name, String logo, String contact, String email, String address,
                     String city, String state, String country, Integer postalCode, String url, String description, String notes,
                     String paymentMethods, Integer active, boolean available) {
         super();
         this.name = name;
-        this.password = password;
+
         this.logo = logo;
         this.contact = contact;
         this.email = email;
@@ -81,13 +81,13 @@ public class Business {
         this.id = id;
     }
 
-    public Business(Integer id, String name, String password, String logo, String contact, String email, String address,
+    public Business(Integer id, String name, String logo, String contact, String email, String address,
                     String city, String state, String country, Integer postalCode, String url, String description, String notes,
                     String paymentMethods, Integer active, Set<Admin> admins, Set<Product> products) {
         super();
         this.id = id;
         this.name = name;
-        this.password = password;
+
         this.logo = logo;
         this.contact = contact;
         this.email = email;
@@ -113,13 +113,6 @@ public class Business {
         this.available = available;
     }
 
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
 
     @Id
     @GeneratedValue(strategy = IDENTITY)

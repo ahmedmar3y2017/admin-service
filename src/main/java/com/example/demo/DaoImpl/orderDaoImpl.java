@@ -21,6 +21,17 @@ public class orderDaoImpl implements orderDao {
     private SessionFactory sessionFactory;
 
     @Override
+    public Orders saveOrders(Orders orders) {
+        Session session = sessionFactory.openSession();
+
+        session.beginTransaction();
+        session.save(orders);
+
+        session.getTransaction().commit();
+        return orders;
+    }
+
+    @Override
     public int deleteOrdersByAvailable(int id) {
         Session session = sessionFactory.openSession();
 
