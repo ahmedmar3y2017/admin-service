@@ -37,7 +37,6 @@ public class AdminDaoImpl implements AdminDao {
 
         session.getTransaction().commit();
 
-
         return admin;
     }
 
@@ -68,6 +67,7 @@ public class AdminDaoImpl implements AdminDao {
         Session session = sessionFactory.openSession();
 
         Admin admin = session.get(Admin.class, id);
+        session.close();
 
         return admin;
     }
