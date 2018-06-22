@@ -1,5 +1,6 @@
 package com.example.demo.WebService;
 
+import java.util.Arrays;
 import java.util.List;
 
 import com.example.demo.Security.EncryptPassword;
@@ -9,17 +10,12 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.*;
+import org.springframework.web.bind.annotation.*;
 
 import com.example.demo.ServiceImpl.BusinessServiceImpl;
 import com.example.demo.entities.Business;
+import org.springframework.web.client.RestTemplate;
 
 // basic Url
 //http://localhost:9091
@@ -166,5 +162,50 @@ public class BusinessRest {
         }
 
     }
+
+
+    // get all cities by Country
+    @ApiOperation(value = "View available city", response = Business.class)
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Successfully retrieved "),
+            @ApiResponse(code = 401, message = "You are not authorized to view the resource"),
+            @ApiResponse(code = 403, message = "Accessing the resource you were trying to reach is forbidden"),
+            @ApiResponse(code = 404, message = "The resource you were trying to reach is not found")
+    }
+    )
+    @RequestMapping(value = "/business/city", method = RequestMethod.GET, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE,
+            produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    public ResponseEntity<?> GetCityDone(
+            @RequestParam(required = true, name = "country", defaultValue = "egypt") String country
+
+    ) {
+
+        // HttpHeaders
+        HttpHeaders headers = new HttpHeaders();
+
+        headers.setAccept(Arrays.asList(new MediaType[]{MediaType.APPLICATION_JSON}));
+        // Request to return JSON format
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        headers.set("X-Mashape-Key", "OHpIbZrnlnmshrI4PGSy2pEEqF2Qp1kHQbgjsnjKWrcv5fTqEz");
+
+        // HttpEntity<String>: To get result as String.
+        HttpEntity<String> entity = new HttpEntity<String>(headers);
+
+        // RestTemplate
+        RestTemplate restTemplate = new RestTemplate();
+
+        // Send request with GET method, and Headers.
+        ResponseEntity<String> response = restTemplate.exchange("https://andruxnet-world-cities-v1.p.mashape.com/?query=" + country + "&searchby=country", //
+                HttpMethod.GET, entity, String.class);
+
+        String result = response.getBody();
+
+        System.out.println(result);
+
+        return new ResponseEntity<String>(result, HttpStatus.OK);
+
+
+    }
+
 
 }

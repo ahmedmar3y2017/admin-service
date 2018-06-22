@@ -20,6 +20,7 @@ import org.springframework.cache.concurrent.ConcurrentMapCacheManager;
 import org.springframework.cache.guava.GuavaCacheManager;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.Bean;
+import org.springframework.http.*;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mobile.device.Device;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -30,6 +31,7 @@ import com.example.demo.ServiceImpl.AdminServiceImpl;
 import com.example.demo.ServiceImpl.BusinessServiceImpl;
 import com.example.demo.entities.Admin;
 import com.example.demo.entities.Business;
+import org.springframework.web.client.RestTemplate;
 
 import javax.annotation.Resource;
 
@@ -78,6 +80,10 @@ public class AdminServiceApplication implements CommandLineRunner {
     // on run App
     @Override
     public void run(String... args) throws Exception {
+
+
+
+
 
 
 /*

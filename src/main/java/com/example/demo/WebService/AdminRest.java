@@ -222,39 +222,39 @@ public class AdminRest {
             }
 
 
-        }}
+        }
+    }
 
-        /************************************************************************/
+    /************************************************************************/
 
-        //  change admin pass and deactive account updated services
-        @ApiOperation(value = "change password Admin", response = String.class)
-        @RequestMapping(value = "/Admin/changepassword", method = RequestMethod.POST)
-        public ResponseEntity<?> ChangePassword(@RequestBody HashMap<String,Object> mapper) throws Exception {
-            int id = (Integer) mapper.get("id");
-            String newPassword = (String) mapper.get("newPassword");
-            String currentPassword = (String) mapper.get("currentPassword");
+    //  change admin pass and deactive account updated services
+    @ApiOperation(value = "change password Admin", response = String.class)
+    @RequestMapping(value = "/admin/changepassword", method = RequestMethod.POST)
+    public ResponseEntity<?> ChangePassword(@RequestBody HashMap<String, Object> mapper) throws Exception {
+        int id = (Integer) mapper.get("id");
+        String newPassword = (String) mapper.get("newPassword");
+        String currentPassword = (String) mapper.get("currentPassword");
+        Admin cuurentadmin = adminServiceImpl.getAdminById(id);
+        if (cuurentadmin == null) {
 
-             Admin cuurentadmin =adminServiceImpl.getAdminById(id);
-              if(cuurentadmin==null){
-
-                  return new ResponseEntity<String>("admin Not Found !!", HttpStatus.NOT_FOUND);
-              }
-            if(null != currentPassword)
-                    if(newPassword != null && !newPassword.isEmpty() && !newPassword.equals("")) {
-                        cuurentadmin.setPassword(EncryptPassword.BCryptPassword(newPassword));
-                        System.out.println("========");
-                        adminServiceImpl.updateAdmin(cuurentadmin);
-                    }
-                 else {
-                    return new ResponseEntity("Incorrect current password!", HttpStatus.BAD_REQUEST);
-                }
-            return new ResponseEntity<String>("Done update Admin password", HttpStatus.OK);
+            return new ResponseEntity<String>("admin Not Found !!", HttpStatus.NOT_FOUND);
+        }
+        if (null != currentPassword)
+            if (newPassword != null && !newPassword.isEmpty() && !newPassword.equals("")) {
+                cuurentadmin.setPassword(EncryptPassword.BCryptPassword(newPassword));
+                System.out.println("========");
+                adminServiceImpl.updateAdmin(cuurentadmin);
+            } else {
+                return new ResponseEntity("Incorrect current password!", HttpStatus.BAD_REQUEST);
+            }
+        return new ResponseEntity<String>("Done update Admin password", HttpStatus.OK);
 
     }
+
     // deactive admin acount
     @ApiOperation(value = "deactive  Admin account", response = String.class)
 
-    @RequestMapping(value = "/Admin/deactive", method = RequestMethod.POST)
+    @RequestMapping(value = "/admin/deactive", method = RequestMethod.POST)
     public ResponseEntity<?> deactiveAcount(@RequestBody int id) throws Exception {
         Admin admin = adminServiceImpl.getAdminById(id);
 
@@ -270,32 +270,6 @@ public class AdminRest {
         }
 
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 }
