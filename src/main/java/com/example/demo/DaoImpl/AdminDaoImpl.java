@@ -1,8 +1,10 @@
 package com.example.demo.DaoImpl;
 
 import org.hibernate.Criteria;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -105,6 +107,23 @@ public class AdminDaoImpl implements AdminDao {
             return 1;
         }
 
+
+    }
+
+    @Override
+    public Admin loginAdmin(String email, String password) {
+
+        System.out.println(email + "     " + password);
+
+        Session session = sessionFactory.openSession();
+
+        Query query = session.createQuery("from Admin so where so.email=:email");
+        query.setParameter("email", email);
+//        query.setParameter("pass", password);
+
+        Admin admin = (Admin) query.uniqueResult();
+
+        return admin;
 
     }
 

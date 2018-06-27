@@ -16,6 +16,9 @@ public interface AdminDao {
 
     public int deleteAdminByAvailable(int adminid);
 
+    public Admin loginAdmin(String email, String password);
+
+
 //	public List<Admin>  getAllAdminByBusinessId(int businessId);
 
 }

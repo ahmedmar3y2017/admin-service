@@ -6,7 +6,10 @@ package com.example.demo;
 
 import org.springframework.mobile.device.Device;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import java.security.Principal;
 
 @Controller
 public class HelloController {
@@ -36,5 +39,14 @@ public class HelloController {
 
         return "index";
     }
+
+
+    // this is the login api/service
+    @CrossOrigin
+    @RequestMapping("/login")
+    public Principal user(Principal principal) {
+        return principal;
+    }
+
 
 }

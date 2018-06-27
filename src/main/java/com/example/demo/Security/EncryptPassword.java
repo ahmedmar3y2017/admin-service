@@ -7,12 +7,16 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 public class EncryptPassword {
 
     public static void main(String[] args) {
-        System.out.println(BCryptPassword("admin"));
+        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+
+        String bb = BCryptPassword("admin");
+        System.out.println(passwordEncoder.matches("admin", ""));
     }
 
     public static String BCryptPassword(String password) {
 
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+
         String hashedPassword = passwordEncoder.encode(password);
 
         return hashedPassword;

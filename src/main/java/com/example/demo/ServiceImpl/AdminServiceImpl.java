@@ -27,21 +27,21 @@ public class AdminServiceImpl implements AdminService {
         return adminDaoImpl.updateAdmin(admin);
     }
 
-//    @CacheEvict(value = "adminCache", key = "#id")
+    //    @CacheEvict(value = "adminCache", key = "#id")
     @Override
     public int deleteAdminById(int id) {
         // TODO Auto-generated method stub
         return adminDaoImpl.deleteAdminById(id);
     }
 
-//    @Cacheable(value = "adminCache", key = "#id", unless = "#result==null")
+    //    @Cacheable(value = "adminCache", key = "#id", unless = "#result==null")
     @Override
     public Admin getAdminById(int id) {
         // TODO Auto-generated method stub
         return adminDaoImpl.getAdminById(id);
     }
 
-//    @Cacheable(value = "adminCache", key = "#username", unless = "#result==null")
+    //    @Cacheable(value = "adminCache", key = "#username", unless = "#result==null")
     @Override
     public Admin getAdminByUsername(String username) {
         return adminDaoImpl.getAdminByUsername(username);
@@ -50,6 +50,11 @@ public class AdminServiceImpl implements AdminService {
     @Override
     public int deleteAdminByAvailable(int adminid) {
         return adminDaoImpl.deleteAdminByAvailable(adminid);
+    }
+
+    @Override
+    public Admin loginAdmin(String email, String password) {
+        return adminDaoImpl.loginAdmin(email, password);
     }
 
 

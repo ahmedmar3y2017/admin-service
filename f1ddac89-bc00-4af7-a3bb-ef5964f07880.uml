@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>DATABASE</ID>
+  <OriginalElement>f1ddac89-bc00-4af7-a3bb-ef5964f07880</OriginalElement>
+  <nodes>
+    <node x="788.0256410256411" y="510.0">f1ddac89-bc00-4af7-a3bb-ef5964f07880.TABLE:businessin.product</node>
+    <node x="827.0" y="121.0">f1ddac89-bc00-4af7-a3bb-ef5964f07880.TABLE:businessin.brands</node>
+    <node x="657.0" y="132.0">f1ddac89-bc00-4af7-a3bb-ef5964f07880.TABLE:businessin.category</node>
+    <node x="0.0" y="33.0">f1ddac89-bc00-4af7-a3bb-ef5964f07880.TABLE:businessin.customers</node>
+    <node x="412.0" y="154.0">f1ddac89-bc00-4af7-a3bb-ef5964f07880.TABLE:businessin.shippers</node>
+    <node x="236.19230769230785" y="554.0">f1ddac89-bc00-4af7-a3bb-ef5964f07880.TABLE:businessin.orders</node>
+    <node x="194.0" y="154.0">f1ddac89-bc00-4af7-a3bb-ef5964f07880.TABLE:businessin.payment</node>
+    <node x="9.5" y="1031.0">f1ddac89-bc00-4af7-a3bb-ef5964f07880.TABLE:businessin.cart</node>
+    <node x="1028.0" y="0.0">f1ddac89-bc00-4af7-a3bb-ef5964f07880.TABLE:businessin.business</node>
+    <node x="1102.0" y="455.0">f1ddac89-bc00-4af7-a3bb-ef5964f07880.TABLE:businessin.admin</node>
+    <node x="277.19230769230785" y="976.0">f1ddac89-bc00-4af7-a3bb-ef5964f07880.TABLE:businessin.order_detail</node>
+    <node x="903.6666666666667" y="998.0">f1ddac89-bc00-4af7-a3bb-ef5964f07880.TABLE:businessin.product_trans</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="f1ddac89-bc00-4af7-a3bb-ef5964f07880.TABLE:businessin.orders" target="f1ddac89-bc00-4af7-a3bb-ef5964f07880.TABLE:businessin.shippers">
+      <point x="51.999999999999886" y="-136.5" />
+      <point x="366.19230769230774" y="430.0" />
+      <point x="514.5" y="430.0" />
+      <point x="0.0" y="48.5" />
+    </edge>
+    <edge source="f1ddac89-bc00-4af7-a3bb-ef5964f07880.TABLE:businessin.order_detail" target="f1ddac89-bc00-4af7-a3bb-ef5964f07880.TABLE:businessin.product">
+      <point x="37.0" y="-103.5" />
+      <point x="388.19230769230785" y="956.0" />
+      <point x="903.0256410256411" y="956.0" />
+      <point x="0.0" y="180.5" />
+    </edge>
+    <edge source="f1ddac89-bc00-4af7-a3bb-ef5964f07880.TABLE:businessin.product" target="f1ddac89-bc00-4af7-a3bb-ef5964f07880.TABLE:businessin.category">
+      <point x="-76.66666666666669" y="-180.5" />
+      <point x="826.3589743589744" y="430.0" />
+      <point x="769.5" y="430.0" />
+      <point x="37.5" y="70.5" />
+    </edge>
+    <edge source="f1ddac89-bc00-4af7-a3bb-ef5964f07880.TABLE:businessin.product" target="f1ddac89-bc00-4af7-a3bb-ef5964f07880.TABLE:businessin.brands">
+      <point x="0.0" y="-180.5" />
+      <point x="903.0256410256411" y="430.0" />
+      <point x="917.5" y="430.0" />
+      <point x="0.0" y="81.5" />
+    </edge>
+    <edge source="f1ddac89-bc00-4af7-a3bb-ef5964f07880.TABLE:businessin.cart" target="f1ddac89-bc00-4af7-a3bb-ef5964f07880.TABLE:businessin.customers">
+      <point x="-34.0" y="-48.5" />
+      <point x="-43.5" y="169.5" />
+    </edge>
+    <edge source="f1ddac89-bc00-4af7-a3bb-ef5964f07880.TABLE:businessin.product" target="f1ddac89-bc00-4af7-a3bb-ef5964f07880.TABLE:businessin.business">
+      <point x="76.66666666666669" y="-180.5" />
+      <point x="979.6923076923078" y="430.0" />
+      <point x="1083.5" y="430.0" />
+      <point x="-55.5" y="202.5" />
+    </edge>
+    <edge source="f1ddac89-bc00-4af7-a3bb-ef5964f07880.TABLE:businessin.orders" target="f1ddac89-bc00-4af7-a3bb-ef5964f07880.TABLE:businessin.customers">
+      <point x="-52.000000000000114" y="-136.5" />
+      <point x="262.19230769230774" y="430.0" />
+      <point x="130.5" y="430.0" />
+      <point x="43.5" y="169.5" />
+    </edge>
+    <edge source="f1ddac89-bc00-4af7-a3bb-ef5964f07880.TABLE:businessin.cart" target="f1ddac89-bc00-4af7-a3bb-ef5964f07880.TABLE:businessin.product">
+      <point x="34.0" y="-48.5" />
+      <point x="111.5" y="946.0" />
+      <point x="826.3589743589744" y="946.0" />
+      <point x="-76.66666666666669" y="180.5" />
+    </edge>
+    <edge source="f1ddac89-bc00-4af7-a3bb-ef5964f07880.TABLE:businessin.admin" target="f1ddac89-bc00-4af7-a3bb-ef5964f07880.TABLE:businessin.business">
+      <point x="0.0" y="-235.5" />
+      <point x="55.5" y="202.5" />
+    </edge>
+    <edge source="f1ddac89-bc00-4af7-a3bb-ef5964f07880.TABLE:businessin.category" target="f1ddac89-bc00-4af7-a3bb-ef5964f07880.TABLE:businessin.category">
+      <point x="-37.5" y="70.5" />
+      <point x="694.5" y="293.0" />
+      <point x="637.0" y="293.0" />
+      <point x="637.0" y="202.5" />
+      <point x="-75.0" y="-0.0" />
+    </edge>
+    <edge source="f1ddac89-bc00-4af7-a3bb-ef5964f07880.TABLE:businessin.order_detail" target="f1ddac89-bc00-4af7-a3bb-ef5964f07880.TABLE:businessin.orders">
+      <point x="-37.0" y="-103.5" />
+      <point x="0.0" y="136.5" />
+    </edge>
+    <edge source="f1ddac89-bc00-4af7-a3bb-ef5964f07880.TABLE:businessin.product_trans" target="f1ddac89-bc00-4af7-a3bb-ef5964f07880.TABLE:businessin.product">
+      <point x="0.0" y="-81.5" />
+      <point x="994.1666666666667" y="956.0" />
+      <point x="979.6923076923078" y="956.0" />
+      <point x="76.66666666666669" y="180.5" />
+    </edge>
+    <edge source="f1ddac89-bc00-4af7-a3bb-ef5964f07880.TABLE:businessin.orders" target="f1ddac89-bc00-4af7-a3bb-ef5964f07880.TABLE:businessin.payment">
+      <point x="-1.1368683772161603E-13" y="-136.5" />
+      <point x="314.19230769230774" y="430.0" />
+      <point x="293.0" y="430.0" />
+      <point x="0.0" y="48.5" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="1.0154987633965376" x="957.0235281190369" y="425.62211537774357" />
+  <SelectedNodes>
+    <node>f1ddac89-bc00-4af7-a3bb-ef5964f07880.TABLE:businessin.product</node>
+  </SelectedNodes>
+  <Categories>
+    <Category>Key columns</Category>
+    <Category>Columns</Category>
+  </Categories>
+</Diagram>
+

@@ -11,11 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.example.demo.ServiceImpl.AdminServiceImpl;
 import com.example.demo.entities.Admin;
@@ -224,6 +220,40 @@ public class AdminRest {
 
         }
     }
+
+
+    // Login Function
+    @RequestMapping(value = "/admin/login", method = RequestMethod.GET, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE,
+            produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    public ResponseEntity<?> Login(@RequestParam(required = true, name = "email", defaultValue = "") String email,
+                                   @RequestParam(required = true, name = "password", defaultValue = "") String password) {
+
+        // decrypt password
+        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+
+        Admin admin = adminServiceImpl.loginAdmin(email, password);
+
+        if (admin == null) {
+
+            return new ResponseEntity<String>("Admin Not Found !!", HttpStatus.NOT_FOUND);
+
+        } else {
+            System.out.println(password);
+            System.out.println(admin.getPassword());
+
+            if (passwordEncoder.matches( password ,admin.getPassword())) {
+                // Encode new password and store it
+                return new ResponseEntity<Admin>(admin, HttpStatus.OK);
+
+            } else {
+                return new ResponseEntity<String>("Admin Error password !!", HttpStatus.NOT_FOUND);
+            }
+
+        }
+
+
+    }
+
 
     /************************************************************************/
 

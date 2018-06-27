@@ -14,6 +14,7 @@ public interface AdminService {
     public Admin getAdminByUsername(String username);
 
     public int deleteAdminByAvailable(int adminid);
+    public Admin loginAdmin(String email, String password);
 
 //	public Admin saveAdmin(int businessid, Admin admin);
 
