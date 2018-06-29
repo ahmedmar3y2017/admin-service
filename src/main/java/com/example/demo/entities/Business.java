@@ -21,7 +21,7 @@ import org.hibernate.annotations.Where;
  */
 @Where(clause = "available =1")
 @Entity
-@Table(name = "business", catalog = "businessin")
+@Table(name = "business")
 // to dynamic insert and update
 @DynamicInsert
 @DynamicUpdate

@@ -20,7 +20,7 @@ import static javax.persistence.GenerationType.IDENTITY;
  */
 @Where(clause = "product_available =1")
 @Entity
-@Table(name = "product", catalog = "businessin")
+@Table(name = "product")
 // to dynamic insert and update
 @DynamicInsert
 @DynamicUpdate
