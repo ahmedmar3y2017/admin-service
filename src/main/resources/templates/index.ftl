@@ -1,8 +1,8 @@
 <#--<!DOCTYPE html>-->
 <#--<html>-->
 <#--<head>-->
-    <#--<meta charset="UTF-8">-->
-    <#--<title>spring-web</title>-->
+<#--<meta charset="UTF-8">-->
+<#--<title>spring-web</title>-->
 <#--</head>-->
 <#--<body>-->
 <#--<h1>You are into browser version</h1>-->
@@ -15,6 +15,6 @@
     <title>Home Page</title>
 </head>
 <body>
-<a href="/pdf">Generate report</a>
+<a href="/pdf" target="_blank">Generate report</a>
 </body>
 </html>

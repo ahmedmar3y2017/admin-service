@@ -20,4 +20,5 @@ public interface BrandDao {
 
     int deleteBrandsByAvailable(int id);
 
+    Brands getBrandsByProductId(int productid);
 }

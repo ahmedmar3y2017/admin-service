@@ -51,4 +51,9 @@ public class BrandServiceImpl implements BrandService {
     public int deleteBrandsByAvailable(int id) {
         return brandDao.deleteBrandsByAvailable(id);
     }
+
+    @Override
+    public Brands getBrandsByProductId(int productid) {
+        return brandDao.getBrandsByProductId(productid);
+    }
 }

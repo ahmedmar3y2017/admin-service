@@ -4,6 +4,7 @@ import java.util.Date;
 
 //import com.example.demo.Swagger.SwaggerConfig;
 import com.example.demo.storage.StorageAdminService;
+import com.example.demo.storage.StorageProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -31,6 +32,9 @@ public class AdminServiceApplication implements CommandLineRunner {
 
     @Resource
     StorageAdminService storageAdminService;
+
+    @Resource
+    StorageProductService storageProductService;
 
     @Autowired
     BusinessServiceImpl businessService;
@@ -95,9 +99,13 @@ public class AdminServiceApplication implements CommandLineRunner {
             adminService.saveAdmin(new Admin(business, "level1", "ahmed", "mar3y", "ahmedmohamedmar3y2017@gmail.com", "$2a$10$vuVscYda3P7lH4gdGvkLbuPIM7X7TfGZBeV/yjjjeP5sp86yY7kKK", 1, "01201288779", "address1", "address 2 ", "tanta", "Egypt", "country", 1234,
                     new Date(), new Date(), "admin", "ADMIN", true));
 
+
+            storageAdminService.deleteAll();
+            storageAdminService.init();
+            storageProductService.deleteAll();
+            storageProductService.init();
+
         }
-//        storageService.deleteAll();
-//        storageService.init();
 
 
 //        else {

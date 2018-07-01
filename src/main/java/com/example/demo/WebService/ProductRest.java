@@ -25,6 +25,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * Created by ahmed on 2/2/2018.
@@ -97,6 +98,7 @@ public class ProductRest {
                 return new ResponseEntity<Product>(a, HttpStatus.CREATED);
 
             } else {
+
                 return new ResponseEntity<String>("Parameters Not Exist in server ", HttpStatus.NO_CONTENT);
 
             }
@@ -158,7 +160,11 @@ public class ProductRest {
                     HttpStatus.NOT_FOUND);
 
         } else {
-            Set<Product> products = business.getProducts();
+
+//             select from product wherer Business Id = اللى جاى
+            Set<Product> products = business.getProducts().stream().filter(ee -> {
+                return ee.isProductAvailable() == true;
+            }).collect(Collectors.toSet());
             if (products.size() == 0) {
                 return new ResponseEntity<String>("Product Not Found !!",
                         HttpStatus.NOT_FOUND);

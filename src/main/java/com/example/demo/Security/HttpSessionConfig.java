@@ -14,4 +14,5 @@ public class HttpSessionConfig {
     public JedisConnectionFactory connectionFactory() {
         return new JedisConnectionFactory();
     }
+
 }

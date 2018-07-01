@@ -3,6 +3,7 @@ package com.example.demo.DaoImpl;
 import com.example.demo.Dao.BrandDao;
 import com.example.demo.entities.Brands;
 import org.hibernate.Criteria;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -123,5 +124,20 @@ public class BrandDaoImpl implements BrandDao {
             return 1;
         }
 
+    }
+
+    @Override
+    public Brands getBrandsByProductId(int productid) {
+//        Session session = sessionFactory.openSession();
+//
+//        session.beginTransaction();
+//        Query query = session.createQuery("select so from Brands so where so.orderDate <= current_date and (so.orderDate + 0) >= (current_date - 7)");
+//
+//        List<Brands> orders = query.uniqueResult();
+//
+//
+//        session.getTransaction().commit();
+
+        return null;
     }
 }

@@ -74,6 +74,33 @@ public class BrandRest {
 
     }
 
+
+    @ApiOperation(value = "View available Brand", response = Brands.class)
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Successfully retrieved "),
+            @ApiResponse(code = 401, message = "You are not authorized to view the resource"),
+            @ApiResponse(code = 403, message = "Accessing the resource you were trying to reach is forbidden"),
+            @ApiResponse(code = 404, message = "The resource you were trying to reach is not found")
+    }
+    )
+    @RequestMapping(value = "/brand/product/{id}", method = RequestMethod.GET, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE,
+            produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    public ResponseEntity<?> GetspecificBrandForProduct(@PathVariable("id") int productid) {
+
+        Brands brands = brandService.getBrandsByProductId(productid);
+        if (brands == null) {
+            return new ResponseEntity<String>("Brand Not Found !!",
+                    HttpStatus.NOT_FOUND);
+
+        } else {
+            return new ResponseEntity<Brands>(brands, HttpStatus.OK);
+
+        }
+
+
+    }
+
+
     // getAll
     @ApiOperation(value = "View a list of available Brands", response = Brands.class)
     @ApiResponses(value = {

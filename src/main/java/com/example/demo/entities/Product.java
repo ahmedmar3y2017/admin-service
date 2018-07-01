@@ -82,6 +82,8 @@ public class Product implements java.io.Serializable {
         this.carts = carts;
     }
 
+
+
     @Id
     @GeneratedValue(strategy = IDENTITY)
 

@@ -19,4 +19,6 @@ public interface BrandService {
     public List<Brands> getAll();
 
     int deleteBrandsByAvailable(int id);
+
+    Brands getBrandsByProductId(int productid);
 }
