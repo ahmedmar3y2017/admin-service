@@ -15,6 +15,6 @@
     <title>Home Page</title>
 </head>
 <body>
-<a href="/pdf" target="_blank">Generate report</a>
+<a href="/products/1" target="_blank">Generate report</a>
 </body>
 </html>
