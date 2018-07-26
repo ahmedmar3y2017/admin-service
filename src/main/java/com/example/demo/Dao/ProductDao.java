@@ -18,6 +18,8 @@ public interface ProductDao {
     public Product getProductById(int id);
 
     public List<Product> getAll();
+//    public List<Product> getAllByBusinessId(int businessId);
+
 
     public int deleteProductByBusinessId(int businessid);
 

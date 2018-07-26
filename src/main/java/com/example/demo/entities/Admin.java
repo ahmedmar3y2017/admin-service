@@ -27,6 +27,7 @@ import org.hibernate.annotations.Where;
 // to dynamic insert and update
 @DynamicInsert
 @DynamicUpdate
+@Proxy(lazy = false)
 
 public class Admin extends User implements java.io.Serializable {
 
@@ -84,7 +85,6 @@ public class Admin extends User implements java.io.Serializable {
 
     @Id
     @GeneratedValue(strategy = IDENTITY)
-
     @Column(name = "id", unique = true, nullable = false)
     public Integer getId() {
         return this.id;
@@ -106,7 +106,7 @@ public class Admin extends User implements java.io.Serializable {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "businessid", nullable = false, updatable = false)
 //	@JsonBackReference
-    @JsonIgnore
+
     public Business getBusiness() {
         return this.business;
     }

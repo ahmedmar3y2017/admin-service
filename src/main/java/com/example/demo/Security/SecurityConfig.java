@@ -24,6 +24,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     AdminDetailServiceImpl adminDetailService;
 //    @Autowired
 //    AuthenticationEntryPoint authenticationEntryPoint;
+private static final String[] PUBLIC_MATCHERS = {
+        "/css/**",
+        "/js/**",
+        "/image/**",
+};
 
     private BCryptPasswordEncoder passwordEncoder() {
         return SecurityUtility.passwordEncoder();
@@ -32,13 +37,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable().cors().disable().httpBasic().and().authorizeRequests()
-                .antMatchers("/authentication/login").permitAll().anyRequest().authenticated();
+                .antMatchers(PUBLIC_MATCHERS).permitAll().anyRequest().authenticated();
     }
 
     @Autowired
     protected void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
         super.configure(auth);
-
+//        auth.inMemoryAuthentication().withUser("ahmed").password("pass").roles("user", "admin");
+//        auth.inMemoryAuthentication().withUser("mohamed").password("pass").roles("user");
         BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
         auth.userDetailsService(adminDetailService).passwordEncoder(passwordEncoder());
     }

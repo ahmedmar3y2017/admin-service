@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import com.example.demo.ServiceImpl.AdminServiceImpl;
 import com.example.demo.entities.Admin;
 
+import java.security.Principal;
 import java.util.HashMap;
 import java.util.Set;
 
@@ -28,6 +29,7 @@ public class AdminRest {
     AdminServiceImpl adminServiceImpl;
     @Autowired
     BusinessServiceImpl businessServiceImpl;
+
 
     // insert
     @ApiOperation(value = "View a list of available Admin to specific Business", response = Admin.class)
@@ -76,7 +78,7 @@ public class AdminRest {
             @ApiResponse(code = 404, message = "The resource you were trying to reach is not found")
     }
     )
-    @RequestMapping(value = "/business/{businessid}/admin", method = RequestMethod.GET, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE,
+    @RequestMapping(value = "/business/{businessid}/admin", method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public ResponseEntity<?> GetAll(@PathVariable("businessid") int businessid) {
         System.out.println("Done");
@@ -137,11 +139,11 @@ public class AdminRest {
     }
 
     // get admin by Id
-    @RequestMapping(value = "/admin/{adminid}", method = RequestMethod.GET, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE,
+    @RequestMapping(value = "/admin/{adminid}", method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public ResponseEntity<?> GetspecificAdmin(@PathVariable("adminid") int adminid) {
 
-
+        System.out.println("ddddddddddddddd");
         Admin admin = adminServiceImpl.getAdminById(adminid);
 
         if (admin == null) {
@@ -183,6 +185,101 @@ public class AdminRest {
                 return new ResponseEntity<Admin>(aadmin, HttpStatus.OK);
 
             }
+        }
+
+
+    }
+
+
+    @RequestMapping(value = "/updateAdminInfo", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE,
+            produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    public ResponseEntity<?> UpdateAdminByBusiness(@RequestBody HashMap<String,Object> mapper) {
+        System.out.println("mmmmmmmmmmmmmmmmmmmmmmmm");
+        int id = (Integer) mapper.get("id");
+        String email = (String) mapper.get("email");
+        String username = (String) mapper.get("username");
+        String firstName = (String) mapper.get("firstName");
+        String lastName = (String) mapper.get("lastName");
+        String country = (String) mapper.get("country");
+        String city = (String) mapper.get("city");
+        String state = (String) mapper.get("state");
+        String phone = (String) mapper.get("phone");
+
+        Admin aadmin = adminServiceImpl.getAdminById(id);
+            if (aadmin == null) {
+                return new ResponseEntity<String>("Admin Not Found !!", HttpStatus.NOT_FOUND);
+
+            } else {
+
+                aadmin.setFirstName(firstName);
+                aadmin.setLastName(lastName);
+                aadmin.setCountry(country);
+                aadmin.setCity(city);
+                aadmin.setState(state);
+                aadmin.setPhone(phone);
+                aadmin.setEmail(email);
+
+                adminServiceImpl.updateAdmin(aadmin);
+                System.out.println("ddddd");
+                return new ResponseEntity<Admin>(aadmin, HttpStatus.OK);
+
+            }
+        }
+
+
+
+    @RequestMapping(value = "/updatebusnessInfo", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE,
+            produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    public ResponseEntity<?> UpdateBusiness(@RequestBody HashMap<String,Object> mapper) {
+        System.out.println("mmmmmmmmmmmmmmmmmmmmmmmm");
+        int id = (Integer) mapper.get("id");
+        String email = (String) mapper.get("email");
+        String name = (String) mapper.get("name");
+        String contact = (String) mapper.get("contact");
+        String address = (String) mapper.get("address");
+        String logo = (String) mapper.get("logo");
+        String city = (String) mapper.get("city");
+        String state = (String) mapper.get("state");
+        String paymentmethod = (String) mapper.get("paymentMethods");
+
+        Business bu = businessServiceImpl.getBusinessById(id);
+        if (bu == null) {
+            return new ResponseEntity<String>("Admin Not Found !!", HttpStatus.NOT_FOUND);
+
+        } else {
+
+
+            bu.setName(name);
+            bu.setContact(contact);
+            bu.setCity(city);
+            bu.setAddress(address);
+            bu.setEmail(email);
+            bu.setLogo(logo);
+
+
+            businessServiceImpl.updateBusiness(bu);
+            System.out.println("ddddd");
+            return new ResponseEntity<Business>(bu, HttpStatus.OK);
+
+        }
+    }
+
+
+    // get bussness by admin Id
+    @RequestMapping(value = "/business/{adminid}", method = RequestMethod.GET,
+            produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    public ResponseEntity<?> Getspecificbussiness(@PathVariable("adminid") int adminid) {
+
+        System.out.println("ddddddddddddddd");
+        Admin admin = adminServiceImpl.getAdminById(adminid);
+        Business bb=admin.getBusiness();
+
+        if (admin == null) {
+            return new ResponseEntity<String>("bussness Not Found !!", HttpStatus.NOT_FOUND);
+
+        } else {
+            return new ResponseEntity<Business>(bb, HttpStatus.OK);
+
         }
 
 
@@ -261,9 +358,16 @@ public class AdminRest {
     @ApiOperation(value = "change password Admin", response = String.class)
     @RequestMapping(value = "/admin/changepassword", method = RequestMethod.POST)
     public ResponseEntity<?> ChangePassword(@RequestBody HashMap<String, Object> mapper) throws Exception {
+
+        System.out.println("vvvvvvvvvvvvvvvv");
+
         int id = (Integer) mapper.get("id");
         String newPassword = (String) mapper.get("newPassword");
         String currentPassword = (String) mapper.get("currentPassword");
+
+
+
+
         Admin cuurentadmin = adminServiceImpl.getAdminById(id);
         if (cuurentadmin == null) {
 
@@ -299,6 +403,16 @@ public class AdminRest {
 
         }
 
+    }
+
+    @RequestMapping("/getCurrentUser")
+    public Admin getCurrentUser(Principal principal) {
+        Admin admin = new Admin();
+        if (null != principal) {
+            admin = adminServiceImpl.getAdminByUsername(principal.getName());
+        }
+        System.out.println(admin.getId()+"+++++++++++++++++++++++");
+        return admin;
     }
 
 

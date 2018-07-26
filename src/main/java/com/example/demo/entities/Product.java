@@ -7,6 +7,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
+import org.hibernate.annotations.Proxy;
 import org.hibernate.annotations.Where;
 
 import java.util.HashSet;
@@ -24,6 +25,7 @@ import static javax.persistence.GenerationType.IDENTITY;
 // to dynamic insert and update
 @DynamicInsert
 @DynamicUpdate
+
 public class Product implements java.io.Serializable {
 
     private Integer id;

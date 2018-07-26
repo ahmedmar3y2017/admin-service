@@ -74,6 +74,7 @@ public class BusinessDaoImpl implements BusinessDao {
         Session session = sessionFactory.openSession();
 
         Business business = session.get(Business.class, id);
+        session.close();
         return business;
     }
 
